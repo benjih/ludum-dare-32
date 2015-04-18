@@ -10,6 +10,7 @@ import com.benjih.ld32.card.Deck;
 import com.benjih.ld32.card.PlayingCard;
 import com.benjih.ld32.card.PlayingCardPosition;
 import com.benjih.ld32.gl.GameDisplay;
+import com.benjih.ld32.gl.Image;
 
 public class Game {
 
@@ -39,7 +40,9 @@ public class Game {
 	}
 
 	public void run () {
+		drawBackground();
 		render();
+		
 		if(turnState.isPlayerTurn()) {
 			
 			if(turnState.equals(TurnState.PLAYER_DRAW)) {
@@ -82,6 +85,20 @@ public class Game {
 					}
 				}
 			}
+		}
+	}
+
+	private void drawBackground() {
+		int screenX = 1920;
+		int imageX = 256;
+		
+		int screenY = 1080;
+		int imageY = 256;
+		
+		for(int x = 0; x < screenX + (imageX / 2); x = x + imageX) {
+			for(int y = 0; y < screenY + (imageY / 2); y = y + imageY) {
+				new Image(x, y, resources.getTexture("background")).render();
+			}	
 		}
 	}
 

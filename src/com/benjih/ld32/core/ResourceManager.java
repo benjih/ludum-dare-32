@@ -14,6 +14,7 @@ public class ResourceManager {
 
 	public ResourceManager () {
 		this.textures = new HashMap<String, Texture>();
+		textures.put("background", FileLoader.loadTexture("res/background.png"));
 		textures.put("basic-card", FileLoader.loadTexture("res/card.png"));
 		textures.put("card-toothbrush", FileLoader.loadTexture("res/card-toothbrush.png"));
 		textures.put("card-hanger", FileLoader.loadTexture("res/card-hanger.png"));
