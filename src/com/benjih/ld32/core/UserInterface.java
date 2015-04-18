@@ -16,7 +16,7 @@ public class UserInterface {
 	
 	private ResourceManager resources;
 	
-	private List<Image> backkgroundImages, topbarImages;
+	private List<Image> backkgroundImages, matImages, topbarImages;
 	private Image pause;
 	
 	private Map<String, String> strings;
@@ -59,8 +59,19 @@ public class UserInterface {
 			for(Image image : backkgroundImages) {
 				image.render();
 			}
-			
-			
+		}
+	}
+	
+	public void drawMats () {
+		if(matImages == null) {
+			matImages = new ArrayList<Image>();
+			matImages.add(new Image(343, 740, resources.getTexture("player-hand-mat"), 1.0f));
+			matImages.add(new Image(343, 0, resources.getTexture("opponent-hand-mat"), 1.0f));
+			matImages.add(new Image(786, 352, resources.getTexture("played-cards-mat"), 1.0f));
+		} else {
+			for(Image image : matImages) {
+				image.render();
+			}
 		}
 	}
 	
@@ -87,15 +98,6 @@ public class UserInterface {
 	}
 
 	public void drawTopbarMessage() {
-		if(font == null) {
-			initFonts();
-		}
 		font.drawString(1920/2, 10, strings.get("top") , new Color(83, 83, 83), TrueTypeFont.ALIGN_CENTER);
 	}
-
-	private void initFonts() {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

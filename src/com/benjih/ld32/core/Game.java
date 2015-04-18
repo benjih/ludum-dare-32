@@ -43,6 +43,7 @@ public class Game {
 
 	public TurnState run (TurnState state) {
 		userInterface.drawBackground();
+		userInterface.drawMats();
 		render();
 		userInterface.drawTopbar();
 		userInterface.drawTopbarMessage();
