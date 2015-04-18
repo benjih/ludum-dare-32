@@ -1,4 +1,4 @@
-package com.benjih.ld32;
+package com.benjih.ld32.resources;
 
 import java.awt.Font;
 import java.io.IOException;

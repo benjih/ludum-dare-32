@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import com.benjih.ld32.core.DrawEffect;
-import com.benjih.ld32.core.ResourceManager;
+import com.benjih.ld32.resources.ResourceManager;
 
 
 public class Deck {

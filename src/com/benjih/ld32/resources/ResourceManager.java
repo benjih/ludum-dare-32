@@ -1,11 +1,9 @@
-package com.benjih.ld32.core;
+package com.benjih.ld32.resources;
 
 import java.awt.Font;
 import java.util.HashMap;
 
 import org.newdawn.slick.opengl.Texture;
-
-import com.benjih.ld32.FileLoader;
 
 public class ResourceManager {
 	

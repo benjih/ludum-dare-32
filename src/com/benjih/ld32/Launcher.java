@@ -1,8 +1,8 @@
 package com.benjih.ld32;
 
 import com.benjih.ld32.core.Game;
-import com.benjih.ld32.core.ResourceManager;
 import com.benjih.ld32.gl.GameDisplay;
+import com.benjih.ld32.resources.ResourceManager;
 
 public class Launcher {
 
