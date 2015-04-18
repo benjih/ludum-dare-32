@@ -78,14 +78,19 @@ public class Game {
 					if(lastCardPlayed != null) {
 						playerHand.useCard(positionToPlay);
 						lastCardPlayed.setPosition(PlayingCardPosition.POS_PLAYED);
-						
+						enemyHealth = enemyHealth - lastCardPlayed.getDamage();
 						printStatus();
 						turnState = TurnState.ENEMY_DRAW;
 					}
 				}
 			}
 		} else {
-			System.out.println("enemy turn");
+			if(turnState.equals(TurnState.ENEMY_DRAW)) {
+				System.out.println("enemy turn");
+				turnState = TurnState.ENEMY_USE;
+			} 
+			
+			
 			while (Keyboard.next()) {
 			    if (Keyboard.getEventKeyState()) {
 			        if (Keyboard.getEventKey() == Keyboard.KEY_T) {
