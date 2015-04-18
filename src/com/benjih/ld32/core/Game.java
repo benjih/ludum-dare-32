@@ -1,10 +1,6 @@
 package com.benjih.ld32.core;
 
-import java.util.Map;
-
 import org.lwjgl.input.Keyboard;
-import org.lwjgl.opengl.Display;
-import org.newdawn.slick.opengl.Texture;
 
 import com.benjih.ld32.card.Deck;
 import com.benjih.ld32.card.PlayingCard;
@@ -23,10 +19,10 @@ public class Game {
 	private TurnState turnState;
 	private long time;
 
-	public Game(GameDisplay display, Map<String, Texture> textureMap) {
+	public Game(GameDisplay display, ResourceManager resources) {
 		this.display = display;
-		player = new Player(new Deck(textureMap));
-		enemy = new Player(new Deck(textureMap));
+		player = new Player(new Deck(resources));
+		enemy = new Player(new Deck(resources));
 
 		turnState = TurnState.PLAYER_DRAW;
 	}

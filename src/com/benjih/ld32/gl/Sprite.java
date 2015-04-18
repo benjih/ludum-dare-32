@@ -1,12 +1,8 @@
 package com.benjih.ld32.gl;
 
-import java.io.IOException;
-
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.opengl.Texture;
-import org.newdawn.slick.opengl.TextureLoader;
-import org.newdawn.slick.util.ResourceLoader;
 
 public abstract class Sprite {
 

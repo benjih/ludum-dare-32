@@ -1,24 +1,17 @@
 package com.benjih.ld32;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import org.newdawn.slick.opengl.Texture;
-
+import com.benjih.ld32.core.ResourceManager;
 import com.benjih.ld32.gl.GameDisplay;
 import com.benjih.ld32.gl.Image;
 
 public class LoadingSplash {
 	
 	private GameDisplay display;
-	private Map<String, Texture> textureMap;
+	private ResourceManager resourceManager;
 	
-	private boolean loadedFlag;
 	
 	public LoadingSplash (GameDisplay display) {
 		this.display = display;
-		textureMap = new HashMap<String, Texture>();
-		loadedFlag = false;
 	}
 	
 	public void run () throws Exception {
@@ -30,9 +23,9 @@ public class LoadingSplash {
 		
 		splash.render();
 		
-		loadFiles();
+		resourceManager = new ResourceManager();
 		
-		while (running || !loadedFlag) {
+		while (running) {
 			display.blit();
 			
 			splash.render();
@@ -49,23 +42,7 @@ public class LoadingSplash {
 		
 	}
 	
-	private void loadFiles () {
-		textureMap.put("basic-card", FileLoader.loadTexture("res/card.png"));
-		textureMap.put("card-toothbrush", FileLoader.loadTexture("res/card-toothbrush.png"));
-		textureMap.put("card-hanger", FileLoader.loadTexture("res/card-hanger.png"));
-		textureMap.put("card-fist", FileLoader.loadTexture("res/card-fist.png"));
-		textureMap.put("card-pillowfort", FileLoader.loadTexture("res/card-pillowfort.png"));
-		textureMap.put("card-tv", FileLoader.loadTexture("res/card-tv.png"));
-		textureMap.put("card-hide", FileLoader.loadTexture("res/card-hide.png"));
-		textureMap.put("card-dodge", FileLoader.loadTexture("res/card-dodge.png"));
-		textureMap.put("card-runaway", FileLoader.loadTexture("res/card-runaway.png"));
-		
-		
-		loadedFlag = true;
+	public ResourceManager getResourceManager () {
+		return resourceManager;
 	}
-
-	public Map<String, Texture> getLoadedTextures () {
-		return textureMap;
-	}
-	
 }

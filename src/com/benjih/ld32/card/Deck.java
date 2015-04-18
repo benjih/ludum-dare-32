@@ -3,27 +3,25 @@ package com.benjih.ld32.card;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-
-import org.newdawn.slick.opengl.Texture;
 
 import com.benjih.ld32.core.DrawEffect;
+import com.benjih.ld32.core.ResourceManager;
 
 
 public class Deck {
 	
 	private List<PlayingCard> cards;
 	
-	public Deck (Map<String, Texture> textureMap) {
+	public Deck (ResourceManager resources) {
 		cards = new ArrayList<PlayingCard>();
-		PlayingCard fist = new PlayingCard("Fist", textureMap.get("card-fist"), 1, 0, null);
-		PlayingCard toothbrush = new PlayingCard("Toothbrush", textureMap.get("card-toothbrush"), 4, 0, null);
-		PlayingCard hanger = new PlayingCard("Hanger", textureMap.get("card-hanger"), 3, 0, null);
-		PlayingCard pillowfort = new PlayingCard("Pillowfort", textureMap.get("card-pillowfort"), 0, 1, null);
-		PlayingCard tv = new PlayingCard("TV", textureMap.get("card-tv"), 1, 2, null);
-		PlayingCard dodge = new PlayingCard("Dodge", textureMap.get("card-dodge"), 0, 0, new DrawEffect(1));
-		PlayingCard hide = new PlayingCard("Hide", textureMap.get("card-hide"), 0, 0, new DrawEffect(2));
-		PlayingCard runaway = new PlayingCard("Run Away", textureMap.get("card-runaway"), 0, 0, new DrawEffect(3));
+		PlayingCard fist = new PlayingCard("Fist", resources.getTexture("card-fist"), 1, 0, null);
+		PlayingCard toothbrush = new PlayingCard("Toothbrush", resources.getTexture("card-toothbrush"), 4, 0, null);
+		PlayingCard hanger = new PlayingCard("Hanger", resources.getTexture("card-hanger"), 3, 0, null);
+		PlayingCard pillowfort = new PlayingCard("Pillowfort", resources.getTexture("card-pillowfort"), 0, 1, null);
+		PlayingCard tv = new PlayingCard("TV", resources.getTexture("card-tv"), 1, 2, null);
+		PlayingCard dodge = new PlayingCard("Dodge", resources.getTexture("card-dodge"), 0, 0, new DrawEffect(1));
+		PlayingCard hide = new PlayingCard("Hide", resources.getTexture("card-hide"), 0, 0, new DrawEffect(2));
+		PlayingCard runaway = new PlayingCard("Run Away", resources.getTexture("card-runaway"), 0, 0, new DrawEffect(3));
 		
 		cards.add(fist);
 		cards.add(fist);

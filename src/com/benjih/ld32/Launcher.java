@@ -1,10 +1,7 @@
 package com.benjih.ld32;
 
-import java.util.Map;
-
-import org.newdawn.slick.opengl.Texture;
-
 import com.benjih.ld32.core.Game;
+import com.benjih.ld32.core.ResourceManager;
 import com.benjih.ld32.gl.GameDisplay;
 
 public class Launcher {
@@ -15,9 +12,9 @@ public class Launcher {
 
 		LoadingSplash loader = new LoadingSplash(display);
 		loader.run();
-		Map<String, Texture> textureMap = loader.getLoadedTextures(); 
+		ResourceManager resources = loader.getResourceManager();
 
-		Game game = new Game(display, textureMap);
+		Game game = new Game(display, resources);
 		
 		while (true) {
 			display.blit();
