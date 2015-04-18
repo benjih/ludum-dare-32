@@ -26,6 +26,9 @@ public class LoadingSplash {
 		
 		Image splash = new Image(0, 0, FileLoader.loadTexture("res/splash.png"));
 		long start = display.getTime();
+		display.blit();
+		
+		splash.render();
 		
 		loadFiles();
 		
@@ -56,6 +59,8 @@ public class LoadingSplash {
 		textureMap.put("card-hide", FileLoader.loadTexture("res/card-hide.png"));
 		textureMap.put("card-dodge", FileLoader.loadTexture("res/card-dodge.png"));
 		textureMap.put("card-runaway", FileLoader.loadTexture("res/card-runaway.png"));
+		
+		
 		loadedFlag = true;
 	}
 
