@@ -42,8 +42,10 @@ public class Hand {
 	}
 	
 	public void render () {
-		for(PlayingCard card : hand.values()) {
+		for(PlayingCardPosition cardPosition : hand.keySet()) {
+			PlayingCard card = hand.get(cardPosition);
 			if(card != null) {
+				card.setPosition(cardPosition);
 				card.render();
 			}
 		}

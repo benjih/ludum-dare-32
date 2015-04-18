@@ -36,7 +36,7 @@ public class Game {
 		        	PlayingCardPosition freePosition = playerHand.getFirstFreeSlot();
 				
 					if(freePosition != null) {
-						playerHand.putCard(freePosition, new PlayingCard(freePosition, textureMap.get("basic-card")));
+						playerHand.putCard(freePosition, new PlayingCard(textureMap.get("basic-card")));
 					}
 		        }
 		        if (Keyboard.getEventKey() == Keyboard.KEY_1) {

@@ -6,9 +6,8 @@ public class PlayingCard extends Sprite {
 	
 	private PlayingCardPosition position;
 
-	public PlayingCard(PlayingCardPosition position, Texture resource) {
-		super(position.getX(), position.getY(), resource);
-		this.position = position;
+	public PlayingCard(Texture resource) {
+		super(0, 0, resource);
 	}
 	
 	public void setPosition(PlayingCardPosition position) {
