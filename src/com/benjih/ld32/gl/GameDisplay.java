@@ -28,7 +28,6 @@ public class GameDisplay {
 					y = 720;
 					scaleFactor = 1.5f;
 				}
-				System.out.println(displayMode.getWidth() + "x" + displayMode.getHeight() + " " + displayMode.isFullscreenCapable());
 			}
 			Display.setDisplayMode(displayModeToUse);
 			Display.setFullscreen(false);
