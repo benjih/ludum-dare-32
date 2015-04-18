@@ -11,8 +11,16 @@ public class GameDisplay {
 	private long lastFrame;
 	
 	public GameDisplay () {
+		
+		DisplayMode displayModeToUse = null;
 		try {
-			Display.setDisplayMode(new DisplayMode(800, 600));
+			for(DisplayMode displayMode : Display.getAvailableDisplayModes()) {
+				if(displayMode.getWidth() == 1920 && displayMode.getHeight() == 1080) {
+					displayModeToUse = displayMode;
+				}
+				System.out.println(displayMode.getWidth() + "x" + displayMode.getHeight() + " " + displayMode.isFullscreenCapable());
+			}
+			Display.setDisplayMode(displayModeToUse);
 			Display.setFullscreen(false);
 			Display.setTitle("Loose Item Battle");
 			Display.create();
@@ -25,12 +33,12 @@ public class GameDisplay {
 	public void init () {
 		GL11.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);       
 		 
-		GL11.glViewport(0,0,800,600);
+		GL11.glViewport(0,0,1920,1080);
 		GL11.glMatrixMode(GL11.GL_MODELVIEW);
 		 
 		GL11.glMatrixMode(GL11.GL_PROJECTION);
 		GL11.glLoadIdentity();
-		GL11.glOrtho(0, 800, 600, 0, 1, -1);
+		GL11.glOrtho(0, 1920, 1080, 0, 1, -1);
 		GL11.glMatrixMode(GL11.GL_MODELVIEW);
 		generateDelta();
 	}

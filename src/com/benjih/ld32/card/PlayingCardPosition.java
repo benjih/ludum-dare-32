@@ -13,10 +13,10 @@ public enum PlayingCardPosition {
 	}
 	
 	public int getX () {
-		return x;
+		return 560 + x;
 	}
 	
 	public int getY () {
-		return y;
+		return 480 + y;
 	}
 }
