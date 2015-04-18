@@ -4,13 +4,14 @@ import org.lwjgl.input.Mouse;
 
 public class MouseUtils {
 
-	public static boolean isClick(int i, int j, int k, int l) {
+	public static boolean isClick(int x, int y, int widthX, int widthY) {
 		
 		int mouseX = Mouse.getX();
-		int mouseY = Mouse.getY();
+		int mouseY = 1080 - Mouse.getY();
 		System.out.println(mouseX + " " + mouseY);
-		return mouseX >= i; //&& mouseX<= k && mouseY >= k && mouseY <= l;
-//		return Mouse.isButtonDown(0);
+		System.out.println("X:" + x + " " + x + widthX);
+		System.out.println("Y:" + y + " " + y + widthY);
+		return mouseX >= x && mouseX<= x + widthX && mouseY >= y && mouseY <= y + widthY;
 	}
 
 }

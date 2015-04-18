@@ -11,6 +11,7 @@ import com.benjih.ld32.card.Deck;
 import com.benjih.ld32.card.PlayingCard;
 import com.benjih.ld32.card.PlayingCardPosition;
 import com.benjih.ld32.gl.GameDisplay;
+import com.benjih.ld32.gl.Image;
 import com.benjih.ld32.resources.ResourceManager;
 
 public class Game {
@@ -31,6 +32,8 @@ public class Game {
 
 	private UserInterface userInterface;
 
+	private boolean shouldPause;
+
 	public Game(GameDisplay display, ResourceManager resources) {
 		this.display = display;
 		this.resources = resources;
@@ -42,16 +45,28 @@ public class Game {
 
 		turnState = TurnState.PLAYER_DRAW;
 		
+		shouldPause = false;
+		
 	}
 
 	public void run () {
-		pause();
 		userInterface.drawBackground();
 		userInterface.drawTopbar();
 		userInterface.drawTopbarMessage();
 		render();
 		
-		if(turnState.isPlayerTurn()) {
+		if(!shouldPause) {
+			shouldPause = shouldPause();
+		} else {
+			new Image(0, 0, resources.getTexture("pause-menu"), 1.0f).render();
+			
+			if (Mouse.isButtonDown(0) && MouseUtils.isClick(710, 468, 500, 52)) {
+				shouldPause = false;
+			}
+		}
+		
+		
+		if(turnState.isPlayerTurn() && !shouldPause) {
 			
 			if(turnState.equals(TurnState.PLAYER_DRAW)) {
 				player.drawCard();
@@ -69,7 +84,7 @@ public class Game {
 					printStatus();
 				}
 			}
-		} else {
+		} else if(!shouldPause){
 			if(turnState.equals(TurnState.ENEMY_DRAW)) {
 				System.out.println("enemy turn");
 				enemy.drawCard();
@@ -96,13 +111,8 @@ public class Game {
 		}
 	}
 
-	private void pause() {
-		boolean pause = false;
-		pause = Mouse.isButtonDown(0) && MouseUtils.isClick(1920 - 64, 0, 64, 64));
-		
-		while(pause) {
-			
-		}
+	private boolean shouldPause() {
+		return Mouse.isButtonDown(0) && MouseUtils.isClick(1920 - 64, 0, 64, 64);
 	}
 
 	private PlayingCardPosition chooseCard () {
