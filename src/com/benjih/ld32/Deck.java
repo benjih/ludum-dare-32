@@ -14,14 +14,14 @@ public class Deck {
 	
 	public Deck (Map<String, Texture> textureMap) {
 		cards = new ArrayList<PlayingCard>();
-		cards.add(new PlayingCard(textureMap.get("card-fist")));
-		cards.add(new PlayingCard(textureMap.get("card-fist")));
-		cards.add(new PlayingCard(textureMap.get("card-fist")));
-		cards.add(new PlayingCard(textureMap.get("card-fist")));
-		cards.add(new PlayingCard(textureMap.get("card-toothbrush")));
-		cards.add(new PlayingCard(textureMap.get("card-toothbrush")));
-		cards.add(new PlayingCard(textureMap.get("card-hanger")));
-		cards.add(new PlayingCard(textureMap.get("card-hanger")));
+		cards.add(new PlayingCard(textureMap.get("card-fist"), 1, 0));
+		cards.add(new PlayingCard(textureMap.get("card-fist"), 1, 0));
+		cards.add(new PlayingCard(textureMap.get("card-fist"), 1, 0));
+		cards.add(new PlayingCard(textureMap.get("card-fist"), 1, 0));
+		cards.add(new PlayingCard(textureMap.get("card-toothbrush"), 4, 0));
+		cards.add(new PlayingCard(textureMap.get("card-toothbrush"), 4, 0));
+		cards.add(new PlayingCard(textureMap.get("card-hanger"), 3, 0));
+		cards.add(new PlayingCard(textureMap.get("card-hanger"), 3, 0));
 		
 		Collections.shuffle(cards);
 	}
