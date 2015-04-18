@@ -22,6 +22,12 @@ public class Deck {
 		cards.add(new PlayingCard(textureMap.get("card-toothbrush"), 4, 0));
 		cards.add(new PlayingCard(textureMap.get("card-hanger"), 3, 0));
 		cards.add(new PlayingCard(textureMap.get("card-hanger"), 3, 0));
+		cards.add(new PlayingCard(textureMap.get("card-pillowfort"), 0, 1));
+		cards.add(new PlayingCard(textureMap.get("card-pillowfort"), 0, 1));
+		cards.add(new PlayingCard(textureMap.get("card-pillowfort"), 0, 1));
+		cards.add(new PlayingCard(textureMap.get("card-pillowfort"), 0, 1));
+		cards.add(new PlayingCard(textureMap.get("card-tv"), 1, 2));
+		cards.add(new PlayingCard(textureMap.get("card-tv"), 1, 2));
 		
 		Collections.shuffle(cards);
 	}
