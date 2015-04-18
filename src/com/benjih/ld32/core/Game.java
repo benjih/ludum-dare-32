@@ -28,11 +28,16 @@ public class Game {
 
 	private TrueTypeFont font;
 
+	private UserInterface userInterface;
+
 	public Game(GameDisplay display, ResourceManager resources) {
 		this.display = display;
 		this.resources = resources;
+		
 		player = new Player(new Deck(resources));
 		enemy = new Player(new Deck(resources));
+		
+		userInterface = new UserInterface(resources);
 
 		turnState = TurnState.PLAYER_DRAW;
 		Font awtFont = resources.getFont("oswald");
@@ -40,7 +45,7 @@ public class Game {
 	}
 
 	public void run () {
-		drawBackground();
+		userInterface.drawBackground();
 		render();
 		
 		if(turnState.isPlayerTurn()) {
@@ -85,20 +90,6 @@ public class Game {
 					}
 				}
 			}
-		}
-	}
-
-	private void drawBackground() {
-		int screenX = 1920;
-		int imageX = 256;
-		
-		int screenY = 1080;
-		int imageY = 256;
-		
-		for(int x = 0; x < screenX + (imageX / 2); x = x + imageX) {
-			for(int y = 0; y < screenY + (imageY / 2); y = y + imageY) {
-				new Image(x, y, resources.getTexture("background")).render();
-			}	
 		}
 	}
 
