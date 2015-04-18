@@ -123,10 +123,29 @@ public class Game {
 
 	private PlayingCardPosition chooseCard () {
 		PlayingCardPosition positionToPlay = null;
+		if(Mouse.isButtonDown(0) && MouseUtils.isClick(PlayingCardPosition.POS_1.getX(), PlayingCardPosition.POS_1.getY(), 181, 252)) {
+			positionToPlay = PlayingCardPosition.POS_1;
+		}
+		if(Mouse.isButtonDown(0) && MouseUtils.isClick(PlayingCardPosition.POS_2.getX(), PlayingCardPosition.POS_2.getY(), 181, 252)) {
+			positionToPlay = PlayingCardPosition.POS_2;
+		}
+		if(Mouse.isButtonDown(0) && MouseUtils.isClick(PlayingCardPosition.POS_3.getX(), PlayingCardPosition.POS_3.getY(), 181, 252)) {
+			positionToPlay = PlayingCardPosition.POS_3;
+		}
+		if(Mouse.isButtonDown(0) && MouseUtils.isClick(PlayingCardPosition.POS_4.getX(), PlayingCardPosition.POS_4.getY(), 181, 252)) {
+			positionToPlay = PlayingCardPosition.POS_4;
+		}
+		if(Mouse.isButtonDown(0) && MouseUtils.isClick(PlayingCardPosition.POS_5.getX(), PlayingCardPosition.POS_5.getY(), 181, 252)) {
+			positionToPlay = PlayingCardPosition.POS_5;
+		}
+		if(Mouse.isButtonDown(0) && MouseUtils.isClick(PlayingCardPosition.POS_6.getX(), PlayingCardPosition.POS_6.getY(), 181, 252)) {
+			positionToPlay = PlayingCardPosition.POS_6;
+		}
+		
+		
 		while (Keyboard.next()) {
 			if (Keyboard.getEventKeyState()) {
 				if (Keyboard.getEventKey() == Keyboard.KEY_1) {
-					positionToPlay = PlayingCardPosition.POS_1;
 				}
 				if (Keyboard.getEventKey() == Keyboard.KEY_2) {
 					positionToPlay = PlayingCardPosition.POS_2;
