@@ -14,15 +14,10 @@ public class Sprite {
 	private Texture resource;
 	private boolean hide = false;
 	
-	public Sprite (int x, int y, String resource) {
+	public Sprite (int x, int y, Texture resource) {
 		this.x = x;
 		this.y = y;
-		try {
-			this.resource = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream(resource));
-		} catch (IOException e) {
-			e.printStackTrace();
-			System.exit(1);
-		}
+		this.resource = resource;
 	}
 	
 	public void render () {
