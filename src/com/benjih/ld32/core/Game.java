@@ -1,6 +1,12 @@
 package com.benjih.ld32.core;
 
+import java.awt.Font;
+import java.io.InputStream;
+
 import org.lwjgl.input.Keyboard;
+import org.newdawn.slick.Color;
+import org.newdawn.slick.TrueTypeFont;
+import org.newdawn.slick.util.ResourceLoader;
 
 import com.benjih.ld32.card.Deck;
 import com.benjih.ld32.card.PlayingCard;
@@ -19,17 +25,23 @@ public class Game {
 	private TurnState turnState;
 	private long time;
 
+	private ResourceManager resources;
+
+	private TrueTypeFont font;
+
 	public Game(GameDisplay display, ResourceManager resources) {
 		this.display = display;
+		this.resources = resources;
 		player = new Player(new Deck(resources));
 		enemy = new Player(new Deck(resources));
 
 		turnState = TurnState.PLAYER_DRAW;
+		Font awtFont = resources.getFont("oswald");
+		font = new TrueTypeFont(awtFont.deriveFont(24f), false);
 	}
 
 	public void run () {
 		render();
-		
 		if(turnState.isPlayerTurn()) {
 			
 			if(turnState.equals(TurnState.PLAYER_DRAW)) {
@@ -38,6 +50,8 @@ public class Game {
 			}
 			
 			if(turnState.equals(TurnState.PLAYER_USE)) {
+				font.drawString(0, 0, "Your turn to play a card" , new Color(255, 255, 2));
+				
 				PlayingCardPosition positionToPlay = chooseCard();
 		
 				if(positionToPlay != null) {
@@ -55,6 +69,7 @@ public class Game {
 			} 
 			
 			if(turnState.equals(TurnState.ENEMY_USE)) {
+				font.drawString(0, 0, "Your oponenet's turn to play a card" , new Color(255, 255, 2));
 				if (display.getTime() >= time + 1600) {
 					PlayingCardPosition positionToPlay = enemyChooseCard();
 					
