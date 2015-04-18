@@ -10,9 +10,8 @@ public abstract class Sprite {
 	private float scale;
 	private Texture resource;
 	private boolean hide = false;
-	private int width, height;
 	
-	public Sprite (int x, int y, int width, int height, Texture resource, float scale) {
+	public Sprite (int x, int y, Texture resource, float scale) {
 		this.x = x;
 		this.y = y;
 		this.scale = scale;

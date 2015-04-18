@@ -18,7 +18,7 @@ public class LoadingSplash {
 	public void run (float scale) throws Exception {
 		boolean running = true;
 		
-		Image splash = new Image(0, 0, 1920, 1080, FileLoader.loadTexture("res/spoopygames.png"), scale);
+		Image splash = new Image(0, 0, FileLoader.loadTexture("res/spoopygames.png"), scale);
 		long start = display.getTime();
 		display.blit();
 		

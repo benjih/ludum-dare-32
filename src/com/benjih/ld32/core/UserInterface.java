@@ -17,6 +17,7 @@ public class UserInterface {
 	private ResourceManager resources;
 	
 	private List<Image> backkgroundImages, topbarImages;
+	private Image pause;
 	
 	private Map<String, String> strings;
 
@@ -50,32 +51,39 @@ public class UserInterface {
 			
 			for(int x = 0; x < screenX + (imageX / 2); x = x + imageX) {
 				for(int y = 0; y < screenY + (imageY / 2); y = y + imageY) {
-					backkgroundImages.add(new Image(x, y, 256, 256, resources.getTexture("background"), 1.0f));
+					backkgroundImages.add(new Image(x, y, resources.getTexture("background"), 1.0f));
 				}	
 			}
+
 		} else {
 			for(Image image : backkgroundImages) {
 				image.render();
 			}
+			
+			
 		}
 	}
 	
 	public void drawTopbar () {
+		int screenX = 1920;
+		int imageX = 256;
 		if(topbarImages == null) {
-			int screenX = 1920;
-			int imageX = 256;
 			
 			
 			topbarImages = new ArrayList<Image>();
 			
 			for(int x = 0; x < screenX + (imageX / 2); x = x + imageX) {
-				topbarImages.add(new Image(x, 0, 256, 256, resources.getTexture("top"), 1.0f));
-			}
-		} else {
-			for(Image image : topbarImages) {
-				image.render();
+				topbarImages.add(new Image(x, 0, resources.getTexture("top"), 1.0f));
 			}
 		}
+		if(pause == null) {
+				pause = new Image(screenX - 64, 0, resources.getTexture("pause"), 1.0f);
+		}
+		for(Image image : topbarImages) {
+			image.render();
+		}
+			
+		pause.render();
 	}
 
 	public void drawTopbarMessage() {

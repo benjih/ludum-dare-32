@@ -3,6 +3,7 @@ package com.benjih.ld32.core;
 import java.awt.Font;
 
 import org.lwjgl.input.Keyboard;
+import org.lwjgl.input.Mouse;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.TrueTypeFont;
 
@@ -44,6 +45,7 @@ public class Game {
 	}
 
 	public void run () {
+		pause();
 		userInterface.drawBackground();
 		userInterface.drawTopbar();
 		userInterface.drawTopbarMessage();
@@ -91,6 +93,15 @@ public class Game {
 					}
 				}
 			}
+		}
+	}
+
+	private void pause() {
+		boolean pause = false;
+		pause = Mouse.isButtonDown(0) && MouseUtils.isClick(1920 - 64, 0, 64, 64));
+		
+		while(pause) {
+			
 		}
 	}
 
