@@ -1,12 +1,10 @@
 package com.benjih.ld32.core;
 
 import java.awt.Font;
-import java.io.InputStream;
 
 import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.TrueTypeFont;
-import org.newdawn.slick.util.ResourceLoader;
 
 import com.benjih.ld32.card.Deck;
 import com.benjih.ld32.card.PlayingCard;

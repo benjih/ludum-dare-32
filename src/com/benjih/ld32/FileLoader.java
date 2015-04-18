@@ -4,7 +4,6 @@ import java.awt.Font;
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 import org.newdawn.slick.util.ResourceLoader;
@@ -31,10 +30,4 @@ public class FileLoader {
 		}
 		return null;
 	}
-	
-//	InputStream inputStream	= ResourceLoader.getResourceAsStream("res/Oswald.ttf");
-//	 
-//	Font awtFont2 = Font.createFont(Font.TRUETYPE_FONT, inputStream);
-//	awtFont2 = awtFont2.deriveFont(24f); // set font size
-//	font2 = new TrueTypeFont(awtFont2, false);
 }
