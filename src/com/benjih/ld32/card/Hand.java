@@ -3,6 +3,9 @@ package com.benjih.ld32.card;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.benjih.ld32.gl.Image;
+import com.benjih.ld32.resources.ResourceManager;
+
 public class Hand {
 	
 	private Map<PlayingCardPosition, PlayingCard> hand;
@@ -53,6 +56,17 @@ public class Hand {
 			if(card != null) {
 				card.setPosition(cardPosition);
 				card.render();
+			}
+		}
+	}
+
+	public void renderHidden (Image cardBack) {
+		for(PlayingCardPosition cardPosition : hand.keySet()) {
+			PlayingCard card = hand.get(cardPosition);
+			if(card != null) {
+				cardBack.setX(cardPosition.getX());
+				cardBack.setY(16);
+				cardBack.render();
 			}
 		}
 	}

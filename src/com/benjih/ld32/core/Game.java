@@ -17,7 +17,8 @@ public class Game {
 	private Player player;
 	private Player enemy;
 
-	private PlayingCard lastCardPlayed;
+	private PlayingCard lastPlayerCard;
+	private PlayingCard lastEnemyCard;
 
 	private long time;
 
@@ -42,9 +43,9 @@ public class Game {
 
 	public TurnState run (TurnState state) {
 		userInterface.drawBackground();
+		render();
 		userInterface.drawTopbar();
 		userInterface.drawTopbarMessage();
-		render();
 		
 		if(!shouldPause) {
 			shouldPause = shouldPause();
@@ -81,7 +82,7 @@ public class Game {
 				PlayingCardPosition positionToPlay = chooseCard();
 		
 				if(positionToPlay != null) {
-					lastCardPlayed = player.playCard(positionToPlay, enemy);
+					lastPlayerCard = player.playCard(positionToPlay, enemy);
 					state = TurnState.ENEMY_DRAW;
 					printStatus();
 				}
@@ -101,9 +102,9 @@ public class Game {
 					
 					if(positionToPlay != null) {
 						if(positionToPlay == null) {
-							lastCardPlayed = null;
+							lastPlayerCard = null;
 						} else {
-							lastCardPlayed = enemy.playCard(positionToPlay, player);
+							lastEnemyCard = enemy.playCard(positionToPlay, player);
 							state = TurnState.PLAYER_DRAW;
 						}
 						printStatus();
@@ -159,13 +160,17 @@ public class Game {
 	private void printStatus() {
 		System.out.println("Player : " + player.getHealth() + "/" + player.getArmour() + " " + player.getDeck().size());
 		System.out.println("Enemy : " + enemy.getHealth() + "/" + enemy.getArmour() + " " + enemy.getDeck().size());
-		
 	}
 
 	private void render() {
 		player.getHand().render();
-		if (lastCardPlayed != null) {
-			lastCardPlayed.render();
+		enemy.getHand().renderHidden(new Image(0, 0, resources.getTexture("card-back"), 1.0f));
+		if (lastPlayerCard != null) {
+			lastPlayerCard.render();
+		}
+		if (lastEnemyCard != null) {
+			lastEnemyCard.setPosition(PlayingCardPosition.POS_ENEMY_PLAYED);
+			lastEnemyCard.render();
 		}
 	}
 }
