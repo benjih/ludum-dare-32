@@ -23,7 +23,6 @@ public class Game {
 
 	private PlayingCard lastCardPlayed;
 
-	private TurnState turnState;
 	private long time;
 
 	private ResourceManager resources;
@@ -43,13 +42,11 @@ public class Game {
 		
 		userInterface = new UserInterface(resources);
 
-		turnState = TurnState.PLAYER_DRAW;
-		
 		shouldPause = false;
 		
 	}
 
-	public void run () {
+	public TurnState run (TurnState state) {
 		userInterface.drawBackground();
 		userInterface.drawTopbar();
 		userInterface.drawTopbarMessage();
@@ -65,38 +62,45 @@ public class Game {
 			}
 			
 			if (Mouse.isButtonDown(0) && MouseUtils.isClick(710, 612, 500, 52)) {
-				System.exit(0);
+				shouldPause = false;
+				return TurnState.ENEMY_WIN;
 			}
 		}
 		
+		if(player.getHealth() <= 0) {
+			state = TurnState.ENEMY_WIN;
+		} else if(enemy.getHealth() <= 0) {
+			state = TurnState.PLAYER_WIN;
+		}
 		
-		if(turnState.isPlayerTurn() && !shouldPause) {
+		
+		if(state.isPlayerTurn() && !shouldPause) {
 			
-			if(turnState.equals(TurnState.PLAYER_DRAW)) {
+			if(state.equals(TurnState.PLAYER_DRAW)) {
 				player.drawCard();
-				turnState = TurnState.PLAYER_USE;
+				state = TurnState.PLAYER_USE;
 			}
 			
-			if(turnState.equals(TurnState.PLAYER_USE)) {
+			if(state.equals(TurnState.PLAYER_USE)) {
 				userInterface.setString("top", "Your turn to play a card");
 				
 				PlayingCardPosition positionToPlay = chooseCard();
 		
 				if(positionToPlay != null) {
 					lastCardPlayed = player.playCard(positionToPlay, enemy);
-					turnState = TurnState.ENEMY_DRAW;
+					state = TurnState.ENEMY_DRAW;
 					printStatus();
 				}
 			}
 		} else if(!shouldPause){
-			if(turnState.equals(TurnState.ENEMY_DRAW)) {
+			if(state.equals(TurnState.ENEMY_DRAW)) {
 				System.out.println("enemy turn");
 				enemy.drawCard();
-				turnState = TurnState.ENEMY_USE;
+				state = TurnState.ENEMY_USE;
 				time = display.getTime();
 			} 
 			
-			if(turnState.equals(TurnState.ENEMY_USE)) {
+			if(state.equals(TurnState.ENEMY_USE)) {
 				userInterface.setString("top", "Your oponenet's turn to play a card");
 				if (display.getTime() >= time + 1600) {
 					PlayingCardPosition positionToPlay = enemyChooseCard();
@@ -106,13 +110,14 @@ public class Game {
 							lastCardPlayed = null;
 						} else {
 							lastCardPlayed = enemy.playCard(positionToPlay, player);
-							turnState = TurnState.PLAYER_DRAW;
+							state = TurnState.PLAYER_DRAW;
 						}
 						printStatus();
 					}
 				}
 			}
 		}
+		return state;
 	}
 
 	private boolean shouldPause() {
