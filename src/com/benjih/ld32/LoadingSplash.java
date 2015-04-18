@@ -51,8 +51,11 @@ public class LoadingSplash {
 		textureMap.put("card-toothbrush", FileLoader.loadTexture("res/card-toothbrush.png"));
 		textureMap.put("card-hanger", FileLoader.loadTexture("res/card-hanger.png"));
 		textureMap.put("card-fist", FileLoader.loadTexture("res/card-fist.png"));
-		textureMap.put("card-pilowfort", FileLoader.loadTexture("res/card-pillowfort.png"));
+		textureMap.put("card-pillowfort", FileLoader.loadTexture("res/card-pillowfort.png"));
 		textureMap.put("card-tv", FileLoader.loadTexture("res/card-tv.png"));
+		textureMap.put("card-hide", FileLoader.loadTexture("res/card-hide.png"));
+		textureMap.put("card-dodge", FileLoader.loadTexture("res/card-dodge.png"));
+		textureMap.put("card-runaway", FileLoader.loadTexture("res/card-runaway.png"));
 		loadedFlag = true;
 	}
 

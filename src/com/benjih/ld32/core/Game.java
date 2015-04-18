@@ -85,6 +85,11 @@ public class Game {
 						lastCardPlayed.setPosition(PlayingCardPosition.POS_PLAYED);
 						playerArmour = playerArmour + lastCardPlayed.getArmour();
 						enemyHealth = enemyHealth - lastCardPlayed.getDamage();
+						
+						Effect effect = lastCardPlayed.getEffect();
+						if(effect != null) {
+							effect.useEffect(playerDeck, playerHand);
+						}
 						printStatus();
 						turnState = TurnState.ENEMY_DRAW;
 					}
