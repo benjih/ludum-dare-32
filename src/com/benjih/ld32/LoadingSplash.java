@@ -45,6 +45,9 @@ public class LoadingSplash {
 	
 	private void loadFiles () {
 		textureMap.put("basic-card", FileLoader.loadTexture("res/card.png"));
+		textureMap.put("card-toothbrush", FileLoader.loadTexture("res/card-toothbrush.png"));
+		textureMap.put("card-hanger", FileLoader.loadTexture("res/card-hanger.png"));
+		textureMap.put("card-fist", FileLoader.loadTexture("res/card-fist.png"));
 		loadedFlag = true;
 	}
 
