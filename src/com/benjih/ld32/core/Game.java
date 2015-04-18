@@ -63,6 +63,10 @@ public class Game {
 			if (Mouse.isButtonDown(0) && MouseUtils.isClick(710, 468, 500, 52)) {
 				shouldPause = false;
 			}
+			
+			if (Mouse.isButtonDown(0) && MouseUtils.isClick(710, 612, 500, 52)) {
+				System.exit(0);
+			}
 		}
 		
 		
