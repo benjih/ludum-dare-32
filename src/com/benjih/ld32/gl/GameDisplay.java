@@ -9,7 +9,9 @@ import org.lwjgl.opengl.GL11;
 public class GameDisplay {
 	
 	private long lastFrame;
-	
+	private float scaleFactor;
+	private int x;
+	private int y;
 	public GameDisplay () {
 		
 		DisplayMode displayModeToUse = null;
@@ -17,6 +19,14 @@ public class GameDisplay {
 			for(DisplayMode displayMode : Display.getAvailableDisplayModes()) {
 				if(displayMode.getWidth() == 1920 && displayMode.getHeight() == 1080) {
 					displayModeToUse = displayMode;
+					x = 1920;
+					y = 1080;
+					scaleFactor = 1.0f;
+				} else if(displayMode.getWidth() == 1920 && displayMode.getHeight() == 1080) {
+					displayModeToUse = displayMode;
+					x = 1080;
+					y = 720;
+					scaleFactor = 1.5f;
 				}
 				System.out.println(displayMode.getWidth() + "x" + displayMode.getHeight() + " " + displayMode.isFullscreenCapable());
 			}
@@ -33,12 +43,12 @@ public class GameDisplay {
 	public void init () {
 		GL11.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);       
 		 
-		GL11.glViewport(0,0,1920,1080);
+		GL11.glViewport(0,0,x,y);
 		GL11.glMatrixMode(GL11.GL_MODELVIEW);
 		 
 		GL11.glMatrixMode(GL11.GL_PROJECTION);
 		GL11.glLoadIdentity();
-		GL11.glOrtho(0, 1920, 1080, 0, 1, -1);
+		GL11.glOrtho(0, x, y, 0, 1, -1);
 		GL11.glMatrixMode(GL11.GL_MODELVIEW);
 		generateDelta();
 	}
@@ -76,6 +86,10 @@ public class GameDisplay {
 		if (Display.isCloseRequested()) {
 			end();
 		}		
+	}
+	
+	public float getScalingFactor () {
+		return scaleFactor;
 	}
 
 }

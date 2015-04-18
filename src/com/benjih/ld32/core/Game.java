@@ -10,7 +10,6 @@ import com.benjih.ld32.card.Deck;
 import com.benjih.ld32.card.PlayingCard;
 import com.benjih.ld32.card.PlayingCardPosition;
 import com.benjih.ld32.gl.GameDisplay;
-import com.benjih.ld32.gl.Image;
 
 public class Game {
 
@@ -40,12 +39,13 @@ public class Game {
 		userInterface = new UserInterface(resources);
 
 		turnState = TurnState.PLAYER_DRAW;
-		Font awtFont = resources.getFont("oswald");
-		font = new TrueTypeFont(awtFont.deriveFont(24f), false);
+		
 	}
 
 	public void run () {
 		userInterface.drawBackground();
+		userInterface.drawTopbar();
+		userInterface.drawTopbarMessage();
 		render();
 		
 		if(turnState.isPlayerTurn()) {
@@ -56,7 +56,7 @@ public class Game {
 			}
 			
 			if(turnState.equals(TurnState.PLAYER_USE)) {
-				font.drawString(0, 0, "Your turn to play a card" , new Color(255, 255, 2));
+				userInterface.setString("top", "Your turn to play a card");
 				
 				PlayingCardPosition positionToPlay = chooseCard();
 		
@@ -75,7 +75,7 @@ public class Game {
 			} 
 			
 			if(turnState.equals(TurnState.ENEMY_USE)) {
-				font.drawString(0, 0, "Your oponenet's turn to play a card" , new Color(255, 255, 2));
+				userInterface.setString("top", "Your oponenet's turn to play a card");
 				if (display.getTime() >= time + 1600) {
 					PlayingCardPosition positionToPlay = enemyChooseCard();
 					

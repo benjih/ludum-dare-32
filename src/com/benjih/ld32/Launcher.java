@@ -11,7 +11,7 @@ public class Launcher {
 		display.init();
 
 		LoadingSplash loader = new LoadingSplash(display);
-		loader.run();
+		loader.run(display.getScalingFactor());
 		ResourceManager resources = loader.getResourceManager();
 
 		Game game = new Game(display, resources);

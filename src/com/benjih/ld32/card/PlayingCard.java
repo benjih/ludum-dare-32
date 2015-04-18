@@ -13,7 +13,7 @@ public class PlayingCard extends Sprite {
 	private String name;
 	
 	public PlayingCard (String name, Texture resource, int damage, int armour, Effect effect) {
-		super(0, 0, resource);
+		super(0, 0, 180, 252, resource, 1.0f);
 		this.name = name;
 		this.damage = damage;
 		this.armour = armour;

@@ -7,12 +7,15 @@ import org.newdawn.slick.opengl.Texture;
 public abstract class Sprite {
 
 	private int x, y;
+	private float scale;
 	private Texture resource;
 	private boolean hide = false;
+	private int width, height;
 	
-	public Sprite (int x, int y, Texture resource) {
+	public Sprite (int x, int y, int width, int height, Texture resource, float scale) {
 		this.x = x;
 		this.y = y;
+		this.scale = scale;
 		this.resource = resource;
 	}
 	
@@ -25,16 +28,16 @@ public abstract class Sprite {
 			GL11.glBegin(GL11.GL_QUADS);
 			
 			GL11.glTexCoord2f(0, 0);
-			GL11.glVertex2f(x, y);
+			GL11.glVertex2f(x  / scale, y / scale);
 			
 			GL11.glTexCoord2f(1, 0);
-			GL11.glVertex2f(x + resource.getTextureWidth(), y);
+			GL11.glVertex2f(x + resource.getTextureWidth() / scale, y  / scale);
 			
 			GL11.glTexCoord2f(1, 1);
-			GL11.glVertex2f(x + resource.getTextureWidth(), y + resource.getTextureHeight());
+			GL11.glVertex2f(x + resource.getTextureWidth() / scale, y + resource.getTextureHeight() / scale);
 			
 			GL11.glTexCoord2f(0, 1);
-			GL11.glVertex2f(x, y + resource.getTextureHeight());
+			GL11.glVertex2f(x  / scale, y + resource.getTextureHeight() / scale);
 			
 			GL11.glEnd();
 			GL11.glDisable(GL11.GL_TEXTURE_2D); 
