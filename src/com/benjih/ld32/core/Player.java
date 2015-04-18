@@ -2,6 +2,8 @@ package com.benjih.ld32.core;
 
 import com.benjih.ld32.card.Deck;
 import com.benjih.ld32.card.Hand;
+import com.benjih.ld32.card.PlayingCard;
+import com.benjih.ld32.card.PlayingCardPosition;
 
 public class Player {
 	
@@ -18,6 +20,30 @@ public class Player {
 		
 	}
 
+	public void drawCard () {
+		PlayingCardPosition freePosition = hand.getFirstFreeSlot();
+		PlayingCard newCard = deck.getTopCard();
+		if(freePosition != null) {
+			hand.putCard(freePosition, newCard);
+		}		
+	}
+	
+	public PlayingCard playCard (PlayingCardPosition positionToPlay, Player enemy) {
+		PlayingCard card = hand.getCard(positionToPlay);
+		if(card != null) {
+			hand.useCard(positionToPlay);
+			card.setPosition(PlayingCardPosition.POS_PLAYED);
+			setArmour(armour + card.getArmour());
+			enemy.setHealth(enemy.getHealth() - card.getDamage());
+			
+			Effect effect = card.getEffect();
+			if(effect != null) {
+				effect.useEffect(deck, hand);
+			}
+		}
+		return card;
+	}
+	
 	public int getHealth () {
 		return health;
 	}
