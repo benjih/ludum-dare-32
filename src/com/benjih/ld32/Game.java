@@ -7,38 +7,67 @@ import org.newdawn.slick.opengl.Texture;
 
 public class Game {
 	
-	private PlayingCard card1;
-	private PlayingCard card2;
-	private PlayingCard card3;
-	private PlayingCard card4;
+	private Hand playerHand;
 	
 	private int playerHealth;
 	private int enemyHealth;
+	
+	private PlayingCard lastCardPlayed;
+
+	private Map<String, Texture> textureMap;
 
 	public Game (Map<String, Texture> textureMap) {
-		card1 = new PlayingCard(PlayingCardPosition.POS_1, textureMap.get("basic-card"));
-		card2 = new PlayingCard(PlayingCardPosition.POS_2, textureMap.get("basic-card"));
-		card3 = new PlayingCard(PlayingCardPosition.POS_3, textureMap.get("basic-card"));
- 		card4 = new PlayingCard(PlayingCardPosition.POS_4, textureMap.get("basic-card"));
+		this.textureMap = textureMap;
+ 		
+ 		playerHand = new Hand();
+ 		
  		playerHealth = 30;
  		enemyHealth = 30;
+ 		
+ 		Keyboard.enableRepeatEvents(false);
 	}
 
 	public void run () {
 		render();
-		
-		if (Keyboard.isKeyDown(Keyboard.KEY_1)) {
-			System.out.println("hello");
-			card1.setPosition(PlayingCardPosition.POS_PLAYED);
-		}
+		PlayingCardPosition positionToPlay = null;
+		while (Keyboard.next()) {
+		    if (Keyboard.getEventKeyState()) {
+		        if (Keyboard.getEventKey() == Keyboard.KEY_SPACE) {
+		        	PlayingCardPosition freePosition = playerHand.getFirstFreeSlot();
+				
+					if(freePosition != null) {
+						playerHand.putCard(freePosition, new PlayingCard(freePosition, textureMap.get("basic-card")));
+					}
+		        }
+		        if (Keyboard.getEventKey() == Keyboard.KEY_1) {
+		        	positionToPlay = PlayingCardPosition.POS_1;
 
+		        }
+		        if (Keyboard.getEventKey() == Keyboard.KEY_2) {
+		        	positionToPlay = PlayingCardPosition.POS_2;
+		        }
+		        if (Keyboard.getEventKey() == Keyboard.KEY_3) {
+		        	positionToPlay = PlayingCardPosition.POS_3;
+		        }
+		        if (Keyboard.getEventKey() == Keyboard.KEY_4) {
+		        	positionToPlay = PlayingCardPosition.POS_4;
+		        }
+		    }
+		}
+		
+		if(positionToPlay !=null) {
+			lastCardPlayed = playerHand.getCard(positionToPlay);
+			if(lastCardPlayed != null) {
+				playerHand.useCard(positionToPlay);
+				lastCardPlayed.setPosition(PlayingCardPosition.POS_PLAYED);
+			}
+		}
 	}
 
 	private void render() {
-		card1.render();
-		card2.render();
-		card3.render();
-		card4.render();		
+		playerHand.render();
+		if(lastCardPlayed !=null) {
+			lastCardPlayed.render();
+		}
 	}
-
 }
