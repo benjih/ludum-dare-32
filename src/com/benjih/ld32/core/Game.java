@@ -1,11 +1,7 @@
 package com.benjih.ld32.core;
 
-import java.awt.Font;
-
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
-import org.newdawn.slick.Color;
-import org.newdawn.slick.TrueTypeFont;
 
 import com.benjih.ld32.card.Deck;
 import com.benjih.ld32.card.PlayingCard;
@@ -26,8 +22,6 @@ public class Game {
 	private long time;
 
 	private ResourceManager resources;
-
-	private TrueTypeFont font;
 
 	private UserInterface userInterface;
 
