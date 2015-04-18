@@ -21,7 +21,7 @@ public class LoadingSplash {
 	public void run () throws Exception {
 		boolean running = true;
 		
-		Sprite splash = new Sprite(0, 0, FileLoader.loadTexture("res/splash.png"));
+		Image splash = new Image(0, 0, FileLoader.loadTexture("res/splash.png"));
 		long start = display.getTime();
 		
 		loadFiles();
@@ -44,7 +44,7 @@ public class LoadingSplash {
 	}
 	
 	private void loadFiles () {
-		
+		textureMap.put("basic-card", FileLoader.loadTexture("res/card.png"));
 		loadedFlag = true;
 	}
 

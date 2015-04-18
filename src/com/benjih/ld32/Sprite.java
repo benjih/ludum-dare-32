@@ -8,7 +8,7 @@ import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 import org.newdawn.slick.util.ResourceLoader;
 
-public class Sprite {
+public abstract class Sprite {
 
 	private int x, y;
 	private Texture resource;
