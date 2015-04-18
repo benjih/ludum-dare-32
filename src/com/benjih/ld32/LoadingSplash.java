@@ -47,5 +47,9 @@ public class LoadingSplash {
 		
 		loadedFlag = true;
 	}
+
+	public Map<String, Texture> getLoadedTextures () {
+		return textureMap;
+	}
 	
 }

@@ -1,12 +1,18 @@
 package com.benjih.ld32;
 
+import java.util.Map;
+
+import org.newdawn.slick.opengl.Texture;
+
 public class Launcher {
 
-	public static void main(String args[]) throws Exception {
+	public static void main (String args[]) throws Exception {
 		GameDisplay display = new GameDisplay();
 		display.init();
 
-		new LoadingSplash(display).run();
+		LoadingSplash loader = new LoadingSplash(display);
+		loader.run();
+		Map<String, Texture> textureMap = loader.getLoadedTextures(); 
 		
 		while (true) {
 			display.blit();
