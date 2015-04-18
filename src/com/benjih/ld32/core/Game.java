@@ -47,6 +47,7 @@ public class Game {
 		render();
 		userInterface.drawTopbar();
 		userInterface.drawTopbarMessage();
+		userInterface.drawScoreCards(player, enemy);
 		
 		if(!shouldPause) {
 			shouldPause = shouldPause();

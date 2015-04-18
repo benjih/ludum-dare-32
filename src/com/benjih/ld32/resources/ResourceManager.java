@@ -21,6 +21,8 @@ public class ResourceManager {
 		textures.put("opponent-hand-mat", FileLoader.loadTexture("res/opponent-hand-mat.png"));
 		textures.put("played-cards-mat", FileLoader.loadTexture("res/played-cards-mat.png"));
 		
+		textures.put("player-card", FileLoader.loadTexture("res/player-card.png"));
+		
 		textures.put("basic-card", FileLoader.loadTexture("res/card.png"));
 		textures.put("card-back", FileLoader.loadTexture("res/card-back.png"));
 		textures.put("card-toothbrush", FileLoader.loadTexture("res/card-toothbrush.png"));

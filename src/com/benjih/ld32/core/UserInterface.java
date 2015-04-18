@@ -21,7 +21,7 @@ public class UserInterface {
 	
 	private Map<String, String> strings;
 
-	private TrueTypeFont font;
+	private TrueTypeFont topBarFont, playerCardNameFont;
 
 	private Font awtFont;
 	
@@ -32,7 +32,8 @@ public class UserInterface {
 		strings.put("top", "");
 		
 		awtFont = resources.getFont("oswald");
-		font = new TrueTypeFont(awtFont.deriveFont(24f), true);
+		topBarFont = new TrueTypeFont(awtFont.deriveFont(24f), true);
+		playerCardNameFont = new TrueTypeFont(awtFont.deriveFont(36f), true);
 	}
 	
 	public void setString(String id, String string) {
@@ -98,6 +99,18 @@ public class UserInterface {
 	}
 
 	public void drawTopbarMessage() {
-		font.drawString(1920/2, 10, strings.get("top") , new Color(83, 83, 83), TrueTypeFont.ALIGN_CENTER);
+		topBarFont.drawString(1920/2, 10, strings.get("top") , new Color(83, 83, 83), TrueTypeFont.ALIGN_CENTER);
+	}
+
+	public void drawScoreCards(Player player, Player enemy) {
+		new Image(0, 199, resources.getTexture("player-card"), 1.0f).render();
+		playerCardNameFont.drawString(15, 219, "Computer", new Color(83, 83, 83));
+		playerCardNameFont.drawString(55, 325, String.valueOf(player.getHealth()), new Color(217, 54, 0), TrueTypeFont.ALIGN_RIGHT);
+		playerCardNameFont.drawString(180, 325, String.valueOf(player.getArmour()), new Color(153, 153, 153), TrueTypeFont.ALIGN_RIGHT);
+		
+		new Image(0, 648, resources.getTexture("player-card"), 1.0f).render();
+		playerCardNameFont.drawString(15, 668, "You", new Color(83, 83, 83));
+		playerCardNameFont.drawString(55, 775, String.valueOf(enemy.getHealth()), new Color(217, 54, 54), TrueTypeFont.ALIGN_RIGHT);
+		playerCardNameFont.drawString(180, 775, String.valueOf(enemy.getArmour()), new Color(153, 153, 153), TrueTypeFont.ALIGN_RIGHT);
 	}
 }
