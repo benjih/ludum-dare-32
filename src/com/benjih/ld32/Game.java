@@ -11,11 +11,15 @@ public class Game {
 	private Deck playerDeck;
 	
 	private int playerHealth;
+	private int playerArmour;
 	private int enemyHealth;
+	private int enemyArmour;
 	
 	private PlayingCard lastCardPlayed;
 
 	private Map<String, Texture> textureMap;
+	
+	private boolean playerTurn;
 
 	public Game (Map<String, Texture> textureMap) {
 		this.textureMap = textureMap;
@@ -26,44 +30,67 @@ public class Game {
  		playerHealth = 30;
  		enemyHealth = 30;
  		
- 		Keyboard.enableRepeatEvents(false);
+ 		playerArmour = 0;
+ 		enemyArmour = 0;
+ 		
+ 		playerTurn = true;
 	}
 
 	public void run () {
 		render();
-		PlayingCardPosition positionToPlay = null;
-		while (Keyboard.next()) {
-		    if (Keyboard.getEventKeyState()) {
-		        if (Keyboard.getEventKey() == Keyboard.KEY_SPACE) {
-		        	PlayingCardPosition freePosition = playerHand.getFirstFreeSlot();
-				
-					if(freePosition != null) {
-						playerHand.putCard(freePosition, playerDeck.getTopCard());
-					}
-		        }
-		        if (Keyboard.getEventKey() == Keyboard.KEY_1) {
-		        	positionToPlay = PlayingCardPosition.POS_1;
-
-		        }
-		        if (Keyboard.getEventKey() == Keyboard.KEY_2) {
-		        	positionToPlay = PlayingCardPosition.POS_2;
-		        }
-		        if (Keyboard.getEventKey() == Keyboard.KEY_3) {
-		        	positionToPlay = PlayingCardPosition.POS_3;
-		        }
-		        if (Keyboard.getEventKey() == Keyboard.KEY_4) {
-		        	positionToPlay = PlayingCardPosition.POS_4;
-		        }
-		    }
-		}
 		
-		if(positionToPlay !=null) {
-			lastCardPlayed = playerHand.getCard(positionToPlay);
-			if(lastCardPlayed != null) {
-				playerHand.useCard(positionToPlay);
-				lastCardPlayed.setPosition(PlayingCardPosition.POS_PLAYED);
+		if(playerTurn) {
+			PlayingCardPosition positionToPlay = null;
+			while (Keyboard.next()) {
+			    if (Keyboard.getEventKeyState()) {
+			        if (Keyboard.getEventKey() == Keyboard.KEY_SPACE) {
+			        	PlayingCardPosition freePosition = playerHand.getFirstFreeSlot();
+					
+						if(freePosition != null) {
+							playerHand.putCard(freePosition, playerDeck.getTopCard());
+						}
+			        }
+			        if (Keyboard.getEventKey() == Keyboard.KEY_1) {
+			        	positionToPlay = PlayingCardPosition.POS_1;
+	
+			        }
+			        if (Keyboard.getEventKey() == Keyboard.KEY_2) {
+			        	positionToPlay = PlayingCardPosition.POS_2;
+			        }
+			        if (Keyboard.getEventKey() == Keyboard.KEY_3) {
+			        	positionToPlay = PlayingCardPosition.POS_3;
+			        }
+			        if (Keyboard.getEventKey() == Keyboard.KEY_4) {
+			        	positionToPlay = PlayingCardPosition.POS_4;
+			        }
+			    }
+			} 
+		
+			if(positionToPlay !=null) {
+				lastCardPlayed = playerHand.getCard(positionToPlay);
+				if(lastCardPlayed != null) {
+					playerHand.useCard(positionToPlay);
+					lastCardPlayed.setPosition(PlayingCardPosition.POS_PLAYED);
+					
+					printStatus();
+					playerTurn = false;
+				}
+			}
+		} else {
+			System.out.println("enemy turn");
+			while (Keyboard.next()) {
+			    if (Keyboard.getEventKeyState()) {
+			        if (Keyboard.getEventKey() == Keyboard.KEY_T) {
+			        	playerTurn = true;
+			        }
+			    }
 			}
 		}
+	}
+	
+	private void printStatus () {
+		System.out.println("Player : " + playerHealth +"/" + playerArmour);
+		System.out.println("Enemy : " + enemyHealth +"/" + enemyArmour);
 	}
 
 	private void render() {
