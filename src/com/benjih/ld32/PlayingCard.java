@@ -10,5 +10,11 @@ public class PlayingCard extends Sprite {
 		super(position.getX(), position.getY(), resource);
 		this.position = position;
 	}
+	
+	public void setPosition(PlayingCardPosition position) {
+		this.position = position;
+		setX(position.getX());
+		setY(position.getY());
+	}
 
 }

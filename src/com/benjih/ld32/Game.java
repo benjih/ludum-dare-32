@@ -7,10 +7,10 @@ import org.newdawn.slick.opengl.Texture;
 
 public class Game {
 	
-	private Sprite card1;
-	private Sprite card2;
-	private Sprite card3;
-	private Sprite card4;
+	private PlayingCard card1;
+	private PlayingCard card2;
+	private PlayingCard card3;
+	private PlayingCard card4;
 	
 	private int playerHealth;
 	private int enemyHealth;
@@ -27,9 +27,9 @@ public class Game {
 	public void run () {
 		render();
 		
-		if (Keyboard.isKeyDown(Keyboard.KEY_W)) {
+		if (Keyboard.isKeyDown(Keyboard.KEY_1)) {
 			System.out.println("hello");
-			card1.hide();
+			card1.setPosition(PlayingCardPosition.POS_PLAYED);
 		}
 
 	}

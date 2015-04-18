@@ -1,14 +1,15 @@
 package com.benjih.ld32;
 
 public enum PlayingCardPosition {
-	POS_1(25), POS_2(215), POS_3(404), POS_4(595);
+	POS_1(25, 338), POS_2(215, 338), POS_3(404, 338), POS_4(595, 338),
+	POS_PLAYED(310, 40);
 	
 	int x;
 	int y;
 	
-	PlayingCardPosition (int x) {
+	PlayingCardPosition (int x, int y) {
 		this.x = x;
-		this.y = 338;
+		this.y = y;
 	}
 	
 	public int getX () {
