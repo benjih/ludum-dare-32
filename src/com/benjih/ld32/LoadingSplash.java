@@ -5,6 +5,9 @@ import java.util.Map;
 
 import org.newdawn.slick.opengl.Texture;
 
+import com.benjih.ld32.gl.GameDisplay;
+import com.benjih.ld32.gl.Image;
+
 public class LoadingSplash {
 	
 	private GameDisplay display;

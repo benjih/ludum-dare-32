@@ -1,4 +1,4 @@
-package com.benjih.ld32;
+package com.benjih.ld32.gl;
 
 import java.io.IOException;
 

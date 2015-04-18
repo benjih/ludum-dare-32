@@ -1,4 +1,4 @@
-package com.benjih.ld32;
+package com.benjih.ld32.core;
 
 public enum TurnState {
 	PLAYER_DRAW(true), PLAYER_USE(true), PLAYER_END(true),

@@ -1,4 +1,4 @@
-package com.benjih.ld32;
+package com.benjih.ld32.card;
 
 import java.util.ArrayList;
 import java.util.Collections;

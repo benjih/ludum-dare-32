@@ -1,4 +1,4 @@
-package com.benjih.ld32;
+package com.benjih.ld32.gl;
 
 import org.lwjgl.LWJGLException;
 import org.lwjgl.Sys;

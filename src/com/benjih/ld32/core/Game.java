@@ -1,9 +1,14 @@
-package com.benjih.ld32;
+package com.benjih.ld32.core;
 
 import java.util.Map;
 
 import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.opengl.Texture;
+
+import com.benjih.ld32.card.Deck;
+import com.benjih.ld32.card.Hand;
+import com.benjih.ld32.card.PlayingCard;
+import com.benjih.ld32.card.PlayingCardPosition;
 
 public class Game {
 

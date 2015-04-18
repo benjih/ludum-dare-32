@@ -4,6 +4,9 @@ import java.util.Map;
 
 import org.newdawn.slick.opengl.Texture;
 
+import com.benjih.ld32.core.Game;
+import com.benjih.ld32.gl.GameDisplay;
+
 public class Launcher {
 
 	public static void main (String args[]) throws Exception {

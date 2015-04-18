@@ -1,4 +1,4 @@
-package com.benjih.ld32;
+package com.benjih.ld32.card;
 
 public enum PlayingCardPosition {
 	POS_1(25, 338), POS_2(215, 338), POS_3(404, 338), POS_4(595, 338),

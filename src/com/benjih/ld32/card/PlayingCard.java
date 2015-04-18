@@ -1,6 +1,8 @@
-package com.benjih.ld32;
+package com.benjih.ld32.card;
 
 import org.newdawn.slick.opengl.Texture;
+
+import com.benjih.ld32.gl.Sprite;
 
 public class PlayingCard extends Sprite {
 	
