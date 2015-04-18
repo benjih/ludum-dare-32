@@ -8,6 +8,7 @@ import org.newdawn.slick.opengl.Texture;
 public class Game {
 	
 	private Hand playerHand;
+	private Deck playerDeck;
 	
 	private int playerHealth;
 	private int enemyHealth;
@@ -20,6 +21,7 @@ public class Game {
 		this.textureMap = textureMap;
  		
  		playerHand = new Hand();
+ 		playerDeck = new Deck(textureMap);
  		
  		playerHealth = 30;
  		enemyHealth = 30;
@@ -36,7 +38,7 @@ public class Game {
 		        	PlayingCardPosition freePosition = playerHand.getFirstFreeSlot();
 				
 					if(freePosition != null) {
-						playerHand.putCard(freePosition, new PlayingCard(textureMap.get("basic-card")));
+						playerHand.putCard(freePosition, playerDeck.getTopCard());
 					}
 		        }
 		        if (Keyboard.getEventKey() == Keyboard.KEY_1) {
