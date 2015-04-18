@@ -1,7 +1,8 @@
 package com.benjih.ld32.card;
 
 public enum PlayingCardPosition {
-	POS_1(25, 338), POS_2(215, 338), POS_3(404, 338), POS_4(595, 338),
+	POS_1(364, 800), POS_2(566, 800), POS_3(768, 800), 
+	POS_4(970, 800), POS_5(1172, 800), POS_6(1374, 800),
 	POS_PLAYED(310, 40), NONE(0, 0);
 	
 	int x;
@@ -13,10 +14,10 @@ public enum PlayingCardPosition {
 	}
 	
 	public int getX () {
-		return 560 + x;
+		return x;
 	}
 	
 	public int getY () {
-		return 480 + y;
+		return y;
 	}
 }

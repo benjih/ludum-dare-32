@@ -134,6 +134,12 @@ public class Game {
 				if (Keyboard.getEventKey() == Keyboard.KEY_4) {
 					positionToPlay = PlayingCardPosition.POS_4;
 				}
+				if (Keyboard.getEventKey() == Keyboard.KEY_5) {
+					positionToPlay = PlayingCardPosition.POS_5;
+				}
+				if (Keyboard.getEventKey() == Keyboard.KEY_6) {
+					positionToPlay = PlayingCardPosition.POS_6;
+				}
 			}
 		}
 		return positionToPlay;

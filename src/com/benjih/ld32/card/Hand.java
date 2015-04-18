@@ -13,6 +13,8 @@ public class Hand {
 		hand.put(PlayingCardPosition.POS_2, null);
 		hand.put(PlayingCardPosition.POS_3, null);
 		hand.put(PlayingCardPosition.POS_4, null);
+		hand.put(PlayingCardPosition.POS_5, null);
+		hand.put(PlayingCardPosition.POS_6, null);
 	}
 	
 	public PlayingCard getCard (PlayingCardPosition position) {
@@ -36,6 +38,10 @@ public class Hand {
 			return PlayingCardPosition.POS_3;
 		} else if (hand.get(PlayingCardPosition.POS_4) == null) {
 			return PlayingCardPosition.POS_4;
+		} else if (hand.get(PlayingCardPosition.POS_5) == null) {
+			return PlayingCardPosition.POS_5;
+		} else if (hand.get(PlayingCardPosition.POS_6) == null) {
+			return PlayingCardPosition.POS_6;
 		}
 		
 		return null;
