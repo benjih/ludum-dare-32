@@ -6,6 +6,8 @@ public class Launcher {
 		GameDisplay display = new GameDisplay();
 		display.init();
 
+		new LoadingSplash(display).run();
+		
 		while (true) {
 			display.blit();
 			display.update();
