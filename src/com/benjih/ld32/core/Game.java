@@ -12,31 +12,16 @@ import com.benjih.ld32.card.PlayingCardPosition;
 
 public class Game {
 
-	private Hand playerHand;
-	private Deck playerDeck;
-
-	private int playerHealth;
-	private int playerArmour;
-	private int enemyHealth;
-	private int enemyArmour;
+	private Player player;
+	private Player enemy;
 
 	private PlayingCard lastCardPlayed;
-
-	private Map<String, Texture> textureMap;
 
 	private TurnState turnState;
 
 	public Game(Map<String, Texture> textureMap) {
-		this.textureMap = textureMap;
-
-		playerHand = new Hand();
-		playerDeck = new Deck(textureMap);
-
-		playerHealth = 30;
-		enemyHealth = 30;
-
-		playerArmour = 0;
-		enemyArmour = 0;
+		player = new Player(new Deck(textureMap));
+		enemy = new Player(null);
 
 		turnState = TurnState.PLAYER_DRAW;
 	}
@@ -47,10 +32,10 @@ public class Game {
 		if(turnState.isPlayerTurn()) {
 			
 			if(turnState.equals(TurnState.PLAYER_DRAW)) {
-				PlayingCardPosition freePosition = playerHand.getFirstFreeSlot();
+				PlayingCardPosition freePosition = player.getHand().getFirstFreeSlot();
 				
 				if(freePosition != null) {
-					playerHand.putCard(freePosition, playerDeck.getTopCard());
+					player.getHand().putCard(freePosition, player.getDeck().getTopCard());
 				}
 				turnState = TurnState.PLAYER_USE;
 			}
@@ -79,16 +64,16 @@ public class Game {
 				}
 		
 				if(positionToPlay !=null) {
-					lastCardPlayed = playerHand.getCard(positionToPlay);
+					lastCardPlayed = player.getHand().getCard(positionToPlay);
 					if(lastCardPlayed != null) {
-						playerHand.useCard(positionToPlay);
+						player.getHand().useCard(positionToPlay);
 						lastCardPlayed.setPosition(PlayingCardPosition.POS_PLAYED);
-						playerArmour = playerArmour + lastCardPlayed.getArmour();
-						enemyHealth = enemyHealth - lastCardPlayed.getDamage();
+						player.setArmour(player.getArmour() + lastCardPlayed.getArmour());
+						enemy.setHealth(enemy.getHealth() - lastCardPlayed.getDamage());
 						
 						Effect effect = lastCardPlayed.getEffect();
 						if(effect != null) {
-							effect.useEffect(playerDeck, playerHand);
+							effect.useEffect(player.getDeck(), player.getHand());
 						}
 						printStatus();
 						turnState = TurnState.ENEMY_DRAW;
@@ -113,12 +98,12 @@ public class Game {
 	}
 
 	private void printStatus() {
-		System.out.println("Player : " + playerHealth + "/" + playerArmour);
-		System.out.println("Enemy : " + enemyHealth + "/" + enemyArmour);
+		System.out.println("Player : " + player.getHealth() + "/" + player.getArmour());
+		System.out.println("Enemy : " + enemy.getHealth() + "/" + enemy.getArmour());
 	}
 
 	private void render() {
-		playerHand.render();
+		player.getHand().render();
 		if (lastCardPlayed != null) {
 			lastCardPlayed.render();
 		}
