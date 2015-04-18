@@ -50,9 +50,16 @@ public class Deck {
 	}
 	
 	public PlayingCard getTopCard () {
+		if(cards.size() == 0) {
+			return null;
+		}
 		PlayingCard playingCard = cards.get(0);
 		cards.remove(0);
 		return playingCard;
+	}
+	
+	public int size () {
+		return cards.size();
 	}
 	
 }

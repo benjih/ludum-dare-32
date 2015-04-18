@@ -23,9 +23,13 @@ public class Player {
 	public void drawCard () {
 		PlayingCardPosition freePosition = hand.getFirstFreeSlot();
 		PlayingCard newCard = deck.getTopCard();
-		if(freePosition != null) {
-			hand.putCard(freePosition, newCard);
-		}		
+		if(newCard == null) {
+			setHealth(health - 1);
+		} else {
+			if(freePosition != null) {
+				hand.putCard(freePosition, newCard);
+			}		
+		}
 	}
 	
 	public PlayingCard playCard (PlayingCardPosition positionToPlay, Player enemy) {

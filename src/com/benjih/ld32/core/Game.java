@@ -47,6 +47,7 @@ public class Game {
 		} else {
 			if(turnState.equals(TurnState.ENEMY_DRAW)) {
 				System.out.println("enemy turn");
+				enemy.drawCard();
 				turnState = TurnState.ENEMY_USE;
 			} 
 			
@@ -83,8 +84,9 @@ public class Game {
 	}
 
 	private void printStatus() {
-		System.out.println("Player : " + player.getHealth() + "/" + player.getArmour());
-		System.out.println("Enemy : " + enemy.getHealth() + "/" + enemy.getArmour());
+		System.out.println("Player : " + player.getHealth() + "/" + player.getArmour() + " " + player.getDeck().size());
+		System.out.println("Enemy : " + enemy.getHealth() + "/" + enemy.getArmour() + " " + enemy.getDeck().size());
+		
 	}
 
 	private void render() {
