@@ -17,7 +17,7 @@ public class Launcher {
 		loader.run();
 		Map<String, Texture> textureMap = loader.getLoadedTextures(); 
 
-		Game game = new Game(textureMap);
+		Game game = new Game(display, textureMap);
 		
 		while (true) {
 			display.blit();

@@ -3,22 +3,28 @@ package com.benjih.ld32.core;
 import java.util.Map;
 
 import org.lwjgl.input.Keyboard;
+import org.lwjgl.opengl.Display;
 import org.newdawn.slick.opengl.Texture;
 
 import com.benjih.ld32.card.Deck;
 import com.benjih.ld32.card.PlayingCard;
 import com.benjih.ld32.card.PlayingCardPosition;
+import com.benjih.ld32.gl.GameDisplay;
 
 public class Game {
 
+	private GameDisplay display;
+	
 	private Player player;
 	private Player enemy;
 
 	private PlayingCard lastCardPlayed;
 
 	private TurnState turnState;
+	private long time;
 
-	public Game(Map<String, Texture> textureMap) {
+	public Game(GameDisplay display, Map<String, Texture> textureMap) {
+		this.display = display;
 		player = new Player(new Deck(textureMap));
 		enemy = new Player(new Deck(textureMap));
 
@@ -49,15 +55,23 @@ public class Game {
 				System.out.println("enemy turn");
 				enemy.drawCard();
 				turnState = TurnState.ENEMY_USE;
+				time = display.getTime();
 			} 
 			
-			
-			while (Keyboard.next()) {
-			    if (Keyboard.getEventKeyState()) {
-			        if (Keyboard.getEventKey() == Keyboard.KEY_T) {
-			        	turnState = TurnState.PLAYER_DRAW;
-			        }
-			    }
+			if(turnState.equals(TurnState.ENEMY_USE)) {
+				if (display.getTime() >= time + 1600) {
+					PlayingCardPosition positionToPlay = enemyChooseCard();
+					
+					if(positionToPlay != null) {
+						if(positionToPlay == null) {
+							lastCardPlayed = null;
+						} else {
+							lastCardPlayed = enemy.playCard(positionToPlay, player);
+							turnState = TurnState.PLAYER_DRAW;
+						}
+						printStatus();
+					}
+				}
 			}
 		}
 	}
@@ -81,6 +95,17 @@ public class Game {
 			}
 		}
 		return positionToPlay;
+	}
+	
+	private PlayingCardPosition enemyChooseCard () {
+		if (enemy.getHand().getCard(PlayingCardPosition.POS_1) != null) {
+			return PlayingCardPosition.POS_1;
+		} else if(enemy.getHand().getCard(PlayingCardPosition.POS_2) != null) {
+			return PlayingCardPosition.POS_2;
+		} else if(enemy.getHand().getCard(PlayingCardPosition.POS_3) != null) {
+			return PlayingCardPosition.POS_3;
+		}
+		return PlayingCardPosition.POS_4;
 	}
 
 	private void printStatus() {
