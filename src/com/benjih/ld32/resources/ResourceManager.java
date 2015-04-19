@@ -18,6 +18,8 @@ public class ResourceManager {
 		textures.put("pause-menu", FileLoader.loadTexture("res/pause-menu.png"));
 		
 		textures.put(("start-menu"), FileLoader.loadTexture("res/start-menu.png"));
+		textures.put(("winner"), FileLoader.loadTexture("res/winner.png"));
+		textures.put(("loser"), FileLoader.loadTexture("res/loser.png"));
 		
 		textures.put("player-hand-mat", FileLoader.loadTexture("res/player-hand-mat.png"));
 		textures.put("opponent-hand-mat", FileLoader.loadTexture("res/opponent-hand-mat.png"));

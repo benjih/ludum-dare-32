@@ -44,9 +44,21 @@ public class Launcher {
 			if(!state.equals(TurnState.ENEMY_WIN) && !state.equals(TurnState.PLAYER_WIN) && !menu) {
 				state = game.run(state);
 			} else if(state.equals(TurnState.ENEMY_WIN)) {
-				System.out.println("Loser");
+				new Image(0, 0, resources.getTexture("loser"), 1.0f).render();
+				
+				if (Mouse.isButtonDown(0) && MouseUtils.isClick(710, 210, 500, 600)) {
+					game = new Game(display, resources);
+					state = TurnState.PLAYER_DRAW;
+					menu = true;
+				}
 			} else if(state.equals(TurnState.PLAYER_WIN)) {
-				System.out.println("Winner");
+				new Image(0, 0, resources.getTexture("winner"), 1.0f).render();
+				
+				if (Mouse.isButtonDown(0) && MouseUtils.isClick(710, 210, 500, 600)) {
+					game = new Game(display, resources);
+					state = TurnState.PLAYER_DRAW;
+					menu = true;
+				}
 			}
 			
 			display.update();
