@@ -42,12 +42,12 @@ public class Deck {
 		cards.add(toothbrush);
 		cards.add(hanger);
 		cards.add(hanger);
-		cards.add(pillowfort);
-		cards.add(pillowfort);
-		cards.add(pillowfort);
-		cards.add(pillowfort);
 		cards.add(tv);
 		cards.add(tv);
+		cards.add(pillowfort);
+		cards.add(pillowfort);
+		cards.add(pillowfort);
+		cards.add(pillowfort);
 		cards.add(dodge);
 		cards.add(dodge);
 		cards.add(hide);
