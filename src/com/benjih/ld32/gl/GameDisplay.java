@@ -69,7 +69,7 @@ public class GameDisplay {
 		System.exit(0);
 	}
 	
-	public long getTime () {
+	public static long getTime () {
 	    return (Sys.getTime() * 1000) / Sys.getTimerResolution();
 	}
 	
