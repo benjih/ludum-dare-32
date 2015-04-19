@@ -47,3 +47,4 @@ Temporary Items
 .classpath
 res/layout.png
 build/*
+.settings/org.eclipse.jdt.core.prefs
