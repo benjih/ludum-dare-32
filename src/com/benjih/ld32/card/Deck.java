@@ -32,6 +32,8 @@ public class Deck {
 		cards.add(fist);
 		cards.add(fist);
 		cards.add(fist);
+		cards.add(fist);
+		cards.add(foot);
 		cards.add(foot);
 		cards.add(foot);
 		cards.add(foot);
@@ -46,7 +48,6 @@ public class Deck {
 		cards.add(pillowfort);
 		cards.add(pillowfort);
 		cards.add(pillowfort);
-		cards.add(pillowfort);
 		cards.add(dodge);
 		cards.add(dodge);
 		cards.add(hide);
@@ -54,8 +55,9 @@ public class Deck {
 		cards.add(hide);
 		cards.add(hide);
 		cards.add(hide);
+		cards.add(hide);
 		cards.add(runaway);
-		cards.add(runaway);
+		cards.add(ninja);
 		cards.add(ninja);
 		cards.add(ninja);
 		
