@@ -11,32 +11,33 @@ import com.benjih.ld32.DisplayScale;
 public class GameDisplay {
 	
 	private long lastFrame;
-	private float scaleFactor;
 	private int x;
 	private int y;
 	public GameDisplay () {
 		
-		DisplayMode displayModeToUse = null;
+		DisplayMode displayModeToUse = new DisplayMode(1280, 720);
+		boolean displayModeLock = false;
 		try {
 			for(DisplayMode displayMode : Display.getAvailableDisplayModes()) {
+				System.out.println(displayMode.getWidth() + "x" + displayMode.getHeight());
 				if(displayMode.getWidth() == 1920 && displayMode.getHeight() == 1080) {
 					displayModeToUse = displayMode;
-					x = 1920;
-					y = 1080;
-					scaleFactor = 1.0f;
+					displayModeLock = true;
 				} else if(displayMode.getWidth() == 1920 && displayMode.getHeight() == 1080) {
 					displayModeToUse = displayMode;
-					x = 1080;
-					y = 720;
-					scaleFactor = 1.5f;
+					displayModeLock = true;
+				} else {
+					if(!displayModeLock) {
+						if(displayModeToUse.getWidth() < displayMode.getWidth()) {
+							displayModeToUse = displayMode;
+						}
+					}
 				}
 			}
-//			Display.setDisplayMode(displayModeToUse);
-//			Display.setFullscreen(true);
-			x = 1280;
-			y = 720;
-			scaleFactor = 1.5f;
-			Display.setDisplayMode(new DisplayMode(x, y));
+			
+			x = displayModeToUse.getWidth();
+			y = displayModeToUse.getHeight();
+			Display.setDisplayMode(displayModeToUse);
 			Display.setFullscreen(true);
 			Display.setTitle("Unconventional Card Battles");
 			Display.create();
@@ -95,7 +96,7 @@ public class GameDisplay {
 	}
 	
 	public DisplayScale getDisplayScale () {
-		return new DisplayScale(scaleFactor);
+		return new DisplayScale(x, y);
 	}
 
 }

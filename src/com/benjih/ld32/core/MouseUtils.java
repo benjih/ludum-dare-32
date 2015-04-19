@@ -16,7 +16,7 @@ public class MouseUtils {
 	public static boolean isClick (int x, int y, int sizeX, int sizeY, DisplayScale displayScale) {
 		
 		int mouseX = Mouse.getX();
-		int mouseY = displayScale.scale(1080) - Mouse.getY();
-		return mouseX >= displayScale.scale(x) && mouseX<= displayScale.scale(x + sizeX) && mouseY >= displayScale.scale(y) && mouseY <= displayScale.scale(y + sizeY);
+		int mouseY = displayScale.scaleY(1080) - Mouse.getY();
+		return mouseX >= displayScale.scaleX(x) && mouseX<= displayScale.scaleX(x + sizeX) && mouseY >= displayScale.scaleY(y) && mouseY <= displayScale.scaleY(y + sizeY);
 	}
 }

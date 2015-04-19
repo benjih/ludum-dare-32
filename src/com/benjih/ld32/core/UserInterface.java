@@ -46,17 +46,17 @@ public class UserInterface {
 	
 	public void drawBackground () {
 		if(backkgroundImages == null) {
-			int screenX = displayScale.scale(1920);
+			int screenX = displayScale.scaleX(1920);
 			int imageX = 256;
 			
-			int screenY = displayScale.scale(1080);
+			int screenY = displayScale.scaleY(1080);
 			int imageY = 256;
 			
 			backkgroundImages = new ArrayList<Image>();
 			
-			for(int x = 0; x < screenX + (imageX / 2); x = x + imageX) {
-				for(int y = 0; y < screenY + (imageY / 2); y = y + imageY) {
-					backkgroundImages.add(new Image(x, y, resources.getTexture("background"), displayScale));
+			for(int x = 0; x <= screenX + imageX; x = x + imageX) {
+				for(int y = 0; y < screenY + imageY; y = y + imageY) {
+					backkgroundImages.add(new Image(x, y, resources.getTexture("background"), new DisplayScale(1920, 1080)));
 				}	
 			}
 
@@ -103,23 +103,23 @@ public class UserInterface {
 	}
 
 	public void drawTopbarMessage() {
-		topBarFont.drawString(displayScale.scale(1920 / 2), displayScale.scale(10), strings.get("top") , new Color(83, 83, 83), TrueTypeFont.ALIGN_CENTER);
+		topBarFont.drawString(displayScale.scaleX(1920 / 2), displayScale.scaleY(10), strings.get("top") , new Color(83, 83, 83), TrueTypeFont.ALIGN_CENTER);
 	}
 
 	public void drawScoreCards(Player player, Player enemy) {
 		new Image(0, 199, resources.getTexture("player-card"), displayScale).render();
-		playerCardNameFont.drawString(displayScale.scale(15), displayScale.scale(219), "Computer", new Color(83, 83, 83));
-		playerCardNameFont.drawString(displayScale.scale(55), displayScale.scale(284), String.valueOf(enemy.getDeck().size()), new Color(83, 83, 83), TrueTypeFont.ALIGN_RIGHT);
-		playerCardNameFont.drawString(displayScale.scale(170), displayScale.scale(284), String.valueOf(enemy.getSuprise()), new Color(217, 217, 0), TrueTypeFont.ALIGN_CENTER);
-		playerCardNameFont.drawString(displayScale.scale(55), displayScale.scale(345), String.valueOf(enemy.getHealth()), new Color(217, 54, 0), TrueTypeFont.ALIGN_RIGHT);
-		playerCardNameFont.drawString(displayScale.scale(170), displayScale.scale(345), String.valueOf(enemy.getArmour()), new Color(153, 153, 153), TrueTypeFont.ALIGN_CENTER);
+		playerCardNameFont.drawString(displayScale.scaleX(15), displayScale.scaleY(219), "Computer", new Color(83, 83, 83));
+		playerCardNameFont.drawString(displayScale.scaleX(55), displayScale.scaleY(284), String.valueOf(enemy.getDeck().size()), new Color(83, 83, 83), TrueTypeFont.ALIGN_RIGHT);
+		playerCardNameFont.drawString(displayScale.scaleX(170), displayScale.scaleY(284), String.valueOf(enemy.getSuprise()), new Color(217, 217, 0), TrueTypeFont.ALIGN_CENTER);
+		playerCardNameFont.drawString(displayScale.scaleX(55), displayScale.scaleY(345), String.valueOf(enemy.getHealth()), new Color(217, 54, 0), TrueTypeFont.ALIGN_RIGHT);
+		playerCardNameFont.drawString(displayScale.scaleX(170), displayScale.scaleY(345), String.valueOf(enemy.getArmour()), new Color(153, 153, 153), TrueTypeFont.ALIGN_CENTER);
 		
 		new Image(0, 648, resources.getTexture("player-card"), displayScale).render();
-		playerCardNameFont.drawString(displayScale.scale(15), displayScale.scale(668), "You", new Color(83, 83, 83));
-		playerCardNameFont.drawString(displayScale.scale(55), displayScale.scale(733), String.valueOf(player.getDeck().size()), new Color(83, 83, 83), TrueTypeFont.ALIGN_RIGHT);
-		playerCardNameFont.drawString(displayScale.scale(170), displayScale.scale(733), String.valueOf(player.getSuprise()), new Color(217, 217, 0), TrueTypeFont.ALIGN_CENTER);
-		playerCardNameFont.drawString(displayScale.scale(55), displayScale.scale(794), String.valueOf(player.getHealth()), new Color(217, 54, 0), TrueTypeFont.ALIGN_RIGHT);
-		playerCardNameFont.drawString(displayScale.scale(170), displayScale.scale(794), String.valueOf(player.getArmour()), new Color(153, 153, 153), TrueTypeFont.ALIGN_CENTER);
+		playerCardNameFont.drawString(displayScale.scaleX(15), displayScale.scaleY(668), "You", new Color(83, 83, 83));
+		playerCardNameFont.drawString(displayScale.scaleX(55), displayScale.scaleY(733), String.valueOf(player.getDeck().size()), new Color(83, 83, 83), TrueTypeFont.ALIGN_RIGHT);
+		playerCardNameFont.drawString(displayScale.scaleX(170), displayScale.scaleY(733), String.valueOf(player.getSuprise()), new Color(217, 217, 0), TrueTypeFont.ALIGN_CENTER);
+		playerCardNameFont.drawString(displayScale.scaleX(55), displayScale.scaleY(794), String.valueOf(player.getHealth()), new Color(217, 54, 0), TrueTypeFont.ALIGN_RIGHT);
+		playerCardNameFont.drawString(displayScale.scaleX(170), displayScale.scaleY(794), String.valueOf(player.getArmour()), new Color(153, 153, 153), TrueTypeFont.ALIGN_CENTER);
 	}
 
 	public void drawTable() {
