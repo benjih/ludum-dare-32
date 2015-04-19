@@ -9,12 +9,14 @@ public class Player {
 	
 	private int health;
 	private int armour;
+	private int deathPulseRate;
 	private Deck deck;
 	private Hand hand;
 	
 	public Player (Deck deck) {
 		this.setHealth(30);
 		this.setArmour(0);
+		this.deathPulseRate = 1;
 		this.deck = deck;
 		this.hand = new Hand();
 		
@@ -24,7 +26,7 @@ public class Player {
 		PlayingCardPosition freePosition = hand.getFirstFreeSlot();
 		PlayingCard newCard = deck.getTopCard();
 		if(newCard == null) {
-			setHealth(health - 1);
+			deathPulse();
 		} else {
 			if(freePosition != null) {
 				hand.putCard(freePosition, newCard);
@@ -56,10 +58,15 @@ public class Player {
 			
 			Effect effect = card.getEffect();
 			if(effect != null) {
-				effect.useEffect(deck, hand);
+				effect.useEffect(this, enemy);
 			}
 		}
 		return card;
+	}
+	
+	private void deathPulse () {
+		health = health - deathPulseRate;
+		deathPulseRate++;
 	}
 	
 	public int getHealth () {

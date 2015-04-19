@@ -1,9 +1,5 @@
 package com.benjih.ld32.core;
 
-import com.benjih.ld32.card.Deck;
-import com.benjih.ld32.card.Hand;
-import com.benjih.ld32.card.PlayingCardPosition;
-
 public class DrawEffect implements Effect {
 	
 	private int drawTimes;
@@ -13,13 +9,9 @@ public class DrawEffect implements Effect {
 	}
 
 	@Override
-	public void useEffect(Deck deck, Hand hand) {
+	public void useEffect(Player player, Player enemy) {
 		for (int i = 1; i <= drawTimes; i++) {
-			PlayingCardPosition freePosition = hand.getFirstFreeSlot();
-			
-			if(freePosition != null) {
-				hand.putCard(freePosition, deck.getTopCard());
-			}
+			player.drawCard();
 		}
 		
 	}
