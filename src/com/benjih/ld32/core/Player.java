@@ -43,24 +43,11 @@ public class Player {
 			card.setPosition(PlayingCardPosition.POS_PLAYED);
 			setArmour(armour + card.getArmour());
 			
-			int damage = card.getDamage();
-			int enemyArmour = enemy.getArmour();
-			if(enemy.getArmour() > 0 && damage > 0) {
-				enemy.setArmour(enemyArmour - damage);
-				damage = damage - enemyArmour;
-				
-				if(enemy.getArmour() < 0) {
-					enemy.setArmour(0);
-				}
-			}
-			
-			if(damage > 0) {
-				enemy.setHealth(enemy.getHealth() - damage);
-			}
+			enemy.attack(card.getDamage());
 			
 			Effect effect = card.getEffect();
 			if(effect != null) {
-				effect.useEffect(this, enemy);
+				effect.useEffect(this, enemy, suprise);
 			}
 		}
 		
@@ -106,5 +93,25 @@ public class Player {
 		if(suprise < 6) {
 			suprise++;
 		}
+	}
+
+	public void attack(int damage) {
+		int oldArmour = armour;
+		if(armour > 0 && damage > 0) {
+			setArmour(armour - damage);
+			damage = damage - oldArmour;
+			
+			if(armour < 0) {
+				setArmour(0);
+			}
+		}
+		
+		if(damage > 0) {
+			setHealth(health - damage);
+		}
+	}
+
+	public void resetSurprise() {
+		suprise = 0;
 	}
 }

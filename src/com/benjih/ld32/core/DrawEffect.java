@@ -9,7 +9,7 @@ public class DrawEffect implements Effect {
 	}
 
 	@Override
-	public void useEffect(Player player, Player enemy) {
+	public void useEffect(Player player, Player enemy, int surprise) {
 		for (int i = 1; i <= drawTimes; i++) {
 			player.drawCard();
 		}
