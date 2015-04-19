@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.benjih.ld32.gl.Image;
-import com.benjih.ld32.resources.ResourceManager;
 
 public class Hand {
 	
