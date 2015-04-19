@@ -22,6 +22,9 @@ public class Player {
 		this.deck = deck;
 		this.hand = new Hand();
 		
+		drawCard();
+		drawCard();
+		drawCard();
 	}
 
 	public void drawCard () {
