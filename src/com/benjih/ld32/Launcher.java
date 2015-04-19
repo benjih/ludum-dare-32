@@ -20,35 +20,36 @@ public class Launcher {
 
 		ResourceManager resources = loadGame(display);
 
-		Game game = new Game(display, resources);
+		UserInterface userInterface = new UserInterface(resources);
+		Game game = new Game(display, resources, userInterface);
 		
 		TurnState state = TurnState.PLAYER_DRAW;
 		boolean menu = true;
 		int tutorial = 0;
-		UserInterface userInterface = new UserInterface(resources);
 		long time = 0;
 		
 		Audio  wavEffect = AudioLoader.getAudio("WAV", resources.getMusic());
 		wavEffect.playAsMusic(1.0f, 1.0f, true);
 		
+		DisplayScale displayScale = display.getDisplayScale();
 		while (true) {
 			display.blit();
 			
 			if(menu) {
 				userInterface.drawBackground();
-				new Image(0, 0, resources.getTexture("start-menu"), 1.0f).render();
+				new Image(0, 0, resources.getTexture("start-menu"), displayScale.getScale()).render();
 				
-				if (Mouse.isButtonDown(0) && MouseUtils.isClick(710, 476, 500, 52)) {
+				if (Mouse.isButtonDown(0) && MouseUtils.isClick(710, 476, 500, 52, displayScale)) {
 					menu = false;
 				}
 				
-				if (Mouse.isButtonDown(0) && MouseUtils.isClick(710, 596, 500, 52)) {
+				if (Mouse.isButtonDown(0) && MouseUtils.isClick(710, 596, 500, 52, displayScale)) {
 					menu = false;
 					tutorial = 1;
 				}
 				
 				
-				if (Mouse.isButtonDown(0) && MouseUtils.isClick(710, 728, 500, 52)) {
+				if (Mouse.isButtonDown(0) && MouseUtils.isClick(710, 728, 500, 52, displayScale)) {
 					display.end();
 				}
 			}
@@ -60,7 +61,7 @@ public class Launcher {
 				}
 				
 				if (GameDisplay.getTime() >= time + 500) {
-					if (Mouse.isButtonDown(0) && MouseUtils.isClick(0, 0, 1920, 1080)) {
+					if (Mouse.isButtonDown(0) && MouseUtils.isClick(0, 0, 1920, 1080, displayScale)) {
 						if(tutorial  == 13) {
 							tutorial = 0;
 							menu = true;
@@ -75,7 +76,7 @@ public class Launcher {
 			if(!state.equals(TurnState.END) && !menu && tutorial == 0) {
 				state = game.run(state);
 			} if(state.equals(TurnState.END)) {
-				game = new Game(display, resources);
+				game = new Game(display, resources, userInterface);
 				state = TurnState.PLAYER_DRAW;
 				menu = true;
 			}
@@ -87,7 +88,7 @@ public class Launcher {
 	
 	public static ResourceManager loadGame (GameDisplay display) throws Exception {
 		LoadingSplash loader = new LoadingSplash(display);
-		loader.run(display.getScalingFactor());
+		loader.run();
 		return loader.getResourceManager();
 	}
 }

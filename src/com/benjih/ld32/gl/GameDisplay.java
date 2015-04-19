@@ -6,6 +6,8 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
 
+import com.benjih.ld32.DisplayScale;
+
 public class GameDisplay {
 	
 	private long lastFrame;
@@ -29,6 +31,8 @@ public class GameDisplay {
 					scaleFactor = 1.5f;
 				}
 			}
+			Display.setDisplayMode(displayModeToUse);
+			Display.setFullscreen(true);
 			Display.setDisplayMode(displayModeToUse);
 			Display.setFullscreen(true);
 			Display.setTitle("Unconventional Card Battles");
@@ -87,8 +91,8 @@ public class GameDisplay {
 		}		
 	}
 	
-	public float getScalingFactor () {
-		return scaleFactor;
+	public DisplayScale getDisplayScale () {
+		return new DisplayScale(scaleFactor);
 	}
 
 }

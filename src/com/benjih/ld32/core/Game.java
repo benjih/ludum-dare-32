@@ -22,13 +22,13 @@ public class Game {
 	private boolean shouldPause;
 	private long time = 0;
 
-	public Game(GameDisplay display, ResourceManager resources) {
+	public Game(GameDisplay display, ResourceManager resources, UserInterface userInterface) {
 		this.resources = resources;
 
 		player = new Player(new Deck(resources));
 		enemy = new Player(new Deck(resources));
 
-		userInterface = new UserInterface(resources);
+		this.userInterface = userInterface;
 
 		shouldPause = false;
 

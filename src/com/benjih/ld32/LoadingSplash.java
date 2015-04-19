@@ -13,7 +13,7 @@ public class LoadingSplash {
 		this.display = display;
 	}
 	
-	public void run (float scale) throws Exception {
+	public void run () throws Exception {
 		boolean running = true;
 		
 		long start = GameDisplay.getTime();
