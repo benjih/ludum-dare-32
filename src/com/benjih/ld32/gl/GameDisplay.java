@@ -30,8 +30,8 @@ public class GameDisplay {
 				}
 			}
 			Display.setDisplayMode(displayModeToUse);
-			Display.setFullscreen(false);
-			Display.setTitle("Loose Item Battle");
+			Display.setFullscreen(true);
+			Display.setTitle("Unconventional Card Battles");
 			Display.create();
 		} catch (LWJGLException e) {
 			e.printStackTrace();

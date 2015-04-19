@@ -19,7 +19,7 @@ public class LoadingSplash {
 		boolean running = true;
 		
 		Image splash = new Image(0, 0, FileLoader.loadTexture("res/spoopygames.png"), scale);
-		long start = display.getTime();
+		long start = GameDisplay.getTime();
 		display.blit();
 		
 		splash.render();
@@ -35,8 +35,10 @@ public class LoadingSplash {
 			
 			display.update();
 			
-			if (display.getTime() >= start + 3000) {
+			if (GameDisplay.getTime() >= start + 3000) {
+				display.blit();
 				running = false;
+				display.update();
 			}
 			
 		}

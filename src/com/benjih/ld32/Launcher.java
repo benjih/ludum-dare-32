@@ -16,9 +16,7 @@ public class Launcher {
 		GameDisplay display = new GameDisplay();
 		display.init();
 
-		LoadingSplash loader = new LoadingSplash(display);
-		loader.run(display.getScalingFactor());
-		ResourceManager resources = loader.getResourceManager();
+		ResourceManager resources = loadGame(display);
 
 		Game game = new Game(display, resources);
 		
@@ -64,5 +62,11 @@ public class Launcher {
 			display.update();
 			display.closeIfRequested();
 		}
+	}
+	
+	public static ResourceManager loadGame (GameDisplay display) throws Exception {
+		LoadingSplash loader = new LoadingSplash(display);
+		loader.run(display.getScalingFactor());
+		return loader.getResourceManager();
 	}
 }
