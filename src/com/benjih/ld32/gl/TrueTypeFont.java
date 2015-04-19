@@ -1,4 +1,4 @@
-package org.newdawn.slick;
+package com.benjih.ld32.gl;
 
 
 
@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.newdawn.slick.Font;
 import org.newdawn.slick.opengl.GLUtils;
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.renderer.Renderer;

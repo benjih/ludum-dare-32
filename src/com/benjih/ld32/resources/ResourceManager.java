@@ -30,6 +30,7 @@ public class ResourceManager {
 		textures.put("card-toothbrush", FileLoader.loadTexture("res/card-toothbrush.png"));
 		textures.put("card-hanger", FileLoader.loadTexture("res/card-hanger.png"));
 		textures.put("card-fist", FileLoader.loadTexture("res/card-fist.png"));
+		textures.put("card-foot", FileLoader.loadTexture("res/card-foot.png"));
 		textures.put("card-pillowfort", FileLoader.loadTexture("res/card-pillowfort.png"));
 		textures.put("card-tv", FileLoader.loadTexture("res/card-tv.png"));
 		textures.put("card-hide", FileLoader.loadTexture("res/card-hide.png"));

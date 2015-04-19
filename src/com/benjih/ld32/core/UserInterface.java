@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.newdawn.slick.Color;
-import org.newdawn.slick.TrueTypeFont;
 
 import com.benjih.ld32.gl.Image;
+import com.benjih.ld32.gl.TrueTypeFont;
 import com.benjih.ld32.resources.ResourceManager;
 
 public class UserInterface {
