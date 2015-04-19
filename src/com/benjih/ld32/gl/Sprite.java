@@ -4,17 +4,19 @@ import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.opengl.Texture;
 
+import com.benjih.ld32.DisplayScale;
+
 public abstract class Sprite {
 
 	private int x, y;
-	private float scale;
 	private Texture resource;
+	private DisplayScale displayScale;
 	private boolean hide = false;
 	
-	public Sprite (int x, int y, Texture resource, float scale) {
+	public Sprite (int x, int y, Texture resource, DisplayScale displayScale) {
 		this.x = x;
 		this.y = y;
-		this.scale = scale;
+		this.displayScale = displayScale;
 		this.resource = resource;
 	}
 	
@@ -27,16 +29,16 @@ public abstract class Sprite {
 			GL11.glBegin(GL11.GL_QUADS);
 			
 			GL11.glTexCoord2f(0, 0);
-			GL11.glVertex2f(x  / scale, y / scale);
+			GL11.glVertex2f(displayScale.scale(x), displayScale.scale(y));
 			
 			GL11.glTexCoord2f(1, 0);
-			GL11.glVertex2f(x + resource.getTextureWidth() / scale, y  / scale);
+			GL11.glVertex2f(displayScale.scale(x + resource.getTextureWidth()), displayScale.scale(y));
 			
 			GL11.glTexCoord2f(1, 1);
-			GL11.glVertex2f(x + resource.getTextureWidth() / scale, y + resource.getTextureHeight() / scale);
+			GL11.glVertex2f(displayScale.scale(x + resource.getTextureWidth()), displayScale.scale(y + resource.getTextureHeight()));
 			
 			GL11.glTexCoord2f(0, 1);
-			GL11.glVertex2f(x  / scale, y + resource.getTextureHeight() / scale);
+			GL11.glVertex2f(displayScale.scale(x), displayScale.scale(y + resource.getTextureHeight()));
 			
 			GL11.glEnd();
 			GL11.glDisable(GL11.GL_TEXTURE_2D); 

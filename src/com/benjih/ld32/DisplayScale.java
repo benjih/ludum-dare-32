@@ -15,4 +15,8 @@ public class DisplayScale {
 	public float getScale () {
 		return scale;
 	}
+
+	public float scaleFont(int toScale) {
+		return toScale / scale;
+	}
 }

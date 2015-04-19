@@ -16,11 +16,12 @@ public class Launcher {
 
 	public static void main (String args[]) throws Exception {
 		GameDisplay display = new GameDisplay();
+		DisplayScale displayScale = display.getDisplayScale();
 		display.init();
 
 		ResourceManager resources = loadGame(display);
 
-		UserInterface userInterface = new UserInterface(resources);
+		UserInterface userInterface = new UserInterface(resources, displayScale);
 		Game game = new Game(display, resources, userInterface);
 		
 		TurnState state = TurnState.PLAYER_DRAW;
@@ -31,7 +32,6 @@ public class Launcher {
 		Audio  wavEffect = AudioLoader.getAudio("WAV", resources.getMusic());
 		wavEffect.playAsMusic(1.0f, 1.0f, true);
 		
-		DisplayScale displayScale = display.getDisplayScale();
 		while (true) {
 			display.blit();
 			

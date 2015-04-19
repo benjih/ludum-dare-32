@@ -31,9 +31,12 @@ public class GameDisplay {
 					scaleFactor = 1.5f;
 				}
 			}
-			Display.setDisplayMode(displayModeToUse);
-			Display.setFullscreen(true);
-			Display.setDisplayMode(displayModeToUse);
+//			Display.setDisplayMode(displayModeToUse);
+//			Display.setFullscreen(true);
+			x = 1280;
+			y = 720;
+			scaleFactor = 1.5f;
+			Display.setDisplayMode(new DisplayMode(x, y));
 			Display.setFullscreen(true);
 			Display.setTitle("Unconventional Card Battles");
 			Display.create();
