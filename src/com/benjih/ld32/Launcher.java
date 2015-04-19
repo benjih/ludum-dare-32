@@ -76,9 +76,20 @@ public class Launcher {
 			if(!state.equals(TurnState.END) && !menu && tutorial == 0) {
 				state = game.run(state);
 			} if(state.equals(TurnState.END)) {
-				game = new Game(display, resources, userInterface);
-				state = TurnState.PLAYER_DRAW;
-				menu = true;
+				
+				if(time == 0) {
+					time = GameDisplay.getTime();
+				}
+				if (GameDisplay.getTime() >= time + 200) {
+					display.update();
+					display.blit();
+					state = TurnState.PLAYER_DRAW;
+					game = new Game(display, resources, userInterface);
+					time = 0;
+					menu = true;
+					userInterface.drawBackground();
+					new Image(0, 0, resources.getTexture("start-menu"), displayScale).render();
+				}
 			}
 			
 			display.update();

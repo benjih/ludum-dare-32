@@ -57,7 +57,7 @@ public class Game {
 			}
 			new Image(0, 0, resources.getTexture("loser"), displayScale).render();
 			if (GameDisplay.getTime() >= time + 500) {
-				if (Mouse.isButtonDown(0) && MouseUtils.isClick(710, 210, 500, 600, displayScale)) {
+				if (Mouse.isButtonDown(0) && MouseUtils.isClick(0, 0, 1920, 1080, displayScale)) {
 					return TurnState.END;
 					
 				}
@@ -68,7 +68,7 @@ public class Game {
 			}
 			new Image(0, 0, resources.getTexture("winner"), displayScale).render();
 			if (GameDisplay.getTime() >= time + 500) {
-				if (Mouse.isButtonDown(0) && MouseUtils.isClick(710, 210, 500, 600, displayScale)) {
+				if (Mouse.isButtonDown(0) && MouseUtils.isClick(0, 0, 1920, 1080, displayScale)) {
 					return TurnState.END;
 					
 				}
