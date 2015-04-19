@@ -54,7 +54,6 @@ public class Launcher {
 				}
 				
 				if (GameDisplay.getTime() >= time + 500) {
-					System.out.println(tutorial);
 					if (Mouse.isButtonDown(0) && MouseUtils.isClick(0, 0, 1920, 1080)) {
 						if(tutorial  == 13) {
 							tutorial = 0;
@@ -67,24 +66,12 @@ public class Launcher {
 				}
 			}
 			
-			if(!state.equals(TurnState.ENEMY_WIN) && !state.equals(TurnState.PLAYER_WIN) && !menu && tutorial == 0) {
+			if(!state.equals(TurnState.END) && !menu && tutorial == 0) {
 				state = game.run(state);
-			} else if(state.equals(TurnState.ENEMY_WIN)) {
-				new Image(0, 0, resources.getTexture("loser"), 1.0f).render();
-				
-				if (Mouse.isButtonDown(0) && MouseUtils.isClick(710, 210, 500, 600)) {
-					game = new Game(display, resources);
-					state = TurnState.PLAYER_DRAW;
-					menu = true;
-				}
-			} else if(state.equals(TurnState.PLAYER_WIN)) {
-				new Image(0, 0, resources.getTexture("winner"), 1.0f).render();
-				
-				if (Mouse.isButtonDown(0) && MouseUtils.isClick(710, 210, 500, 600)) {
-					game = new Game(display, resources);
-					state = TurnState.PLAYER_DRAW;
-					menu = true;
-				}
+			} if(state.equals(TurnState.END)) {
+				game = new Game(display, resources);
+				state = TurnState.PLAYER_DRAW;
+				menu = true;
 			}
 			
 			display.update();

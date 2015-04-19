@@ -20,6 +20,7 @@ public class Game {
 	private TurnManager turnManager;
 
 	private boolean shouldPause;
+	private long time = 0;
 
 	public Game(GameDisplay display, ResourceManager resources) {
 		this.resources = resources;
@@ -38,6 +39,7 @@ public class Game {
 	public TurnState run (TurnState state) {
 		state = turnManager.isGameOver(state);
 		
+		
 		state = turnManager.drawCard(state);
 		state = turnManager.playCard(state, new HumanController(), new AIController());
 		
@@ -46,6 +48,30 @@ public class Game {
 		userInterface.drawTopbar();
 		userInterface.drawTopbarMessage();
 		userInterface.drawScoreCards(player, enemy);
+		
+		if(state.equals(TurnState.ENEMY_WIN)) {
+			if(time == 0) {
+				time = GameDisplay.getTime();
+			}
+			new Image(0, 0, resources.getTexture("loser"), 1.0f).render();
+			if (GameDisplay.getTime() >= time + 500) {
+				if (Mouse.isButtonDown(0) && MouseUtils.isClick(710, 210, 500, 600)) {
+					return TurnState.END;
+					
+				}
+			}
+		} else if(state.equals(TurnState.PLAYER_WIN)) {
+			if(time == 0) {
+				time = GameDisplay.getTime();
+			}
+			new Image(0, 0, resources.getTexture("winner"), 1.0f).render();
+			if (GameDisplay.getTime() >= time + 500) {
+				if (Mouse.isButtonDown(0) && MouseUtils.isClick(710, 210, 500, 600)) {
+					return TurnState.END;
+					
+				}
+			}
+		}
 		
 		if(!shouldPause) {
 			shouldPause = shouldPause();
