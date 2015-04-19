@@ -15,30 +15,38 @@ public class GameDisplay {
 	private int y;
 	public GameDisplay () {
 		
-		DisplayMode displayModeToUse = new DisplayMode(1280, 720);
-		boolean displayModeLock = false;
+		DisplayMode displayModeBest = null;
+		DisplayMode displayModeOkay = new DisplayMode(1280, 720);
 		try {
 			for(DisplayMode displayMode : Display.getAvailableDisplayModes()) {
 				System.out.println(displayMode.getWidth() + "x" + displayMode.getHeight());
 				if(displayMode.getWidth() == 1920 && displayMode.getHeight() == 1080) {
-					displayModeToUse = displayMode;
-					displayModeLock = true;
+					displayModeBest = displayMode;
 				} else if(displayMode.getWidth() == 1920 && displayMode.getHeight() == 1080) {
-					displayModeToUse = displayMode;
-					displayModeLock = true;
+					displayModeBest = displayMode;
 				} else {
-					if(!displayModeLock) {
-						if(displayModeToUse.getWidth() < displayMode.getWidth()) {
-							displayModeToUse = displayMode;
-						}
+					if(displayModeOkay.getWidth() < displayMode.getWidth() && displayModeOkay.getHeight() < displayMode.getHeight()) {
+						displayModeOkay = displayMode;
 					}
 				}
 			}
 			
-			x = displayModeToUse.getWidth();
-			y = displayModeToUse.getHeight();
-			Display.setDisplayMode(displayModeToUse);
-			Display.setFullscreen(true);
+			if(displayModeBest == null) {
+				displayModeBest = displayModeOkay;
+			}
+			
+			x = displayModeBest.getWidth();
+			y = displayModeBest.getHeight();
+			
+			Display.setDisplayMode(displayModeBest);
+			
+			if(displayModeBest.getWidth() < displayModeOkay.getWidth() && displayModeBest.getHeight() < displayModeOkay.getHeight()) {
+				Display.setFullscreen(false);
+			} else {
+				Display.setFullscreen(true);
+				
+			}
+			
 			Display.setTitle("Unconventional Card Battles");
 			Display.create();
 		} catch (LWJGLException e) {
