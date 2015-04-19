@@ -22,7 +22,9 @@ public class Launcher {
 		
 		TurnState state = TurnState.PLAYER_DRAW;
 		boolean menu = true;
+		int tutorial = 0;
 		UserInterface userInterface = new UserInterface(resources);
+		long time = 0;
 		while (true) {
 			display.blit();
 			
@@ -30,16 +32,42 @@ public class Launcher {
 				userInterface.drawBackground();
 				new Image(0, 0, resources.getTexture("start-menu"), 1.0f).render();
 				
-				if (Mouse.isButtonDown(0) && MouseUtils.isClick(710, 468, 500, 52)) {
+				if (Mouse.isButtonDown(0) && MouseUtils.isClick(710, 476, 500, 52)) {
 					menu = false;
 				}
 				
-				if (Mouse.isButtonDown(0) && MouseUtils.isClick(710, 612, 500, 52)) {
+				if (Mouse.isButtonDown(0) && MouseUtils.isClick(710, 596, 500, 52)) {
+					menu = false;
+					tutorial = 1;
+				}
+				
+				
+				if (Mouse.isButtonDown(0) && MouseUtils.isClick(710, 728, 500, 52)) {
 					display.end();
 				}
 			}
 			
-			if(!state.equals(TurnState.ENEMY_WIN) && !state.equals(TurnState.PLAYER_WIN) && !menu) {
+			if(tutorial > 0) {
+				new Image(0, 0, resources.getTexture("tutorial-" + tutorial), 1.0f).render();
+				if(time == 0) {
+					time = GameDisplay.getTime();
+				}
+				
+				if (GameDisplay.getTime() >= time + 500) {
+					System.out.println(tutorial);
+					if (Mouse.isButtonDown(0) && MouseUtils.isClick(0, 0, 1920, 1080)) {
+						if(tutorial  == 13) {
+							tutorial = 0;
+							menu = true;
+						} else {
+							tutorial++;
+						}
+						time = 0;
+					}
+				}
+			}
+			
+			if(!state.equals(TurnState.ENEMY_WIN) && !state.equals(TurnState.PLAYER_WIN) && !menu && tutorial == 0) {
 				state = game.run(state);
 			} else if(state.equals(TurnState.ENEMY_WIN)) {
 				new Image(0, 0, resources.getTexture("loser"), 1.0f).render();

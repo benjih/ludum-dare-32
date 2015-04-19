@@ -17,6 +17,22 @@ public class ResourceManager {
 		textures.put("pause", FileLoader.loadTexture("res/pause.png"));
 		textures.put("pause-menu", FileLoader.loadTexture("res/pause-menu.png"));
 		
+		textures.put("tutorial-1", FileLoader.loadTexture("res/tutorial01.png"));
+		textures.put("tutorial-2", FileLoader.loadTexture("res/tutorial02.png"));
+		textures.put("tutorial-3", FileLoader.loadTexture("res/tutorial03.png"));
+		textures.put("tutorial-4", FileLoader.loadTexture("res/tutorial04.png"));
+		textures.put("tutorial-5", FileLoader.loadTexture("res/tutorial05.png"));
+		textures.put("tutorial-6", FileLoader.loadTexture("res/tutorial06.png"));
+		textures.put("tutorial-7", FileLoader.loadTexture("res/tutorial07.png"));
+		textures.put("tutorial-8", FileLoader.loadTexture("res/tutorial08.png"));
+		textures.put("tutorial-9", FileLoader.loadTexture("res/tutorial09.png"));
+		textures.put("tutorial-10", FileLoader.loadTexture("res/tutorial10.png"));
+		textures.put("tutorial-11", FileLoader.loadTexture("res/tutorial11.png"));
+		textures.put("tutorial-12", FileLoader.loadTexture("res/tutorial12.png"));
+		textures.put("tutorial-13", FileLoader.loadTexture("res/tutorial13.png"));
+		
+		
+		
 		textures.put(("start-menu"), FileLoader.loadTexture("res/start-menu.png"));
 		textures.put(("winner"), FileLoader.loadTexture("res/winner.png"));
 		textures.put(("loser"), FileLoader.loadTexture("res/loser.png"));
