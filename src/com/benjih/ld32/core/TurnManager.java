@@ -33,20 +33,26 @@ public class TurnManager {
 	
 	public TurnState drawCard (TurnState state) {
 		if(state.equals(TurnState.PLAYER_DRAW)) {
-			player.drawCard();
-			return TurnState.PLAYER_USE;
+			userInterface.setString("top", "Your turn to draw a card");
+			return drawCard(player, state, TurnState.PLAYER_USE);
 		} else if(state.equals(TurnState.ENEMY_DRAW)) {
-			if(time == 0) {
-				time = GameDisplay.getTime();
-			}
-			if (GameDisplay.getTime() >= time + 1600) {
-				enemy.drawCard();
-				time = 0;
-				return TurnState.ENEMY_USE;
-			}
+			userInterface.setString("top", "Your oponenet's turn to draw a card");
+			return drawCard(enemy, state, TurnState.ENEMY_USE);
 		}
 		
 		return state;
+	}
+	
+	private TurnState drawCard (Player currentPlayer, TurnState currentState, TurnState returnState) {
+		if(time == 0) {
+			time = GameDisplay.getTime();
+		}
+		if (GameDisplay.getTime() >= time + 500) {
+			currentPlayer.drawCard();
+			time = 0;
+			return returnState;
+		}
+		return currentState;
 	}
 
 	public TurnState playCard(TurnState state, PlayerController controller, PlayerController enemyController) {
