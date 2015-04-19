@@ -56,7 +56,7 @@ public class UserInterface {
 			
 			for(int x = 0; x < screenX + (imageX / 2); x = x + imageX) {
 				for(int y = 0; y < screenY + (imageY / 2); y = y + imageY) {
-					backkgroundImages.add(new Image(x, y, resources.getTexture("background"), 1.0f));
+					backkgroundImages.add(new Image(x, y, resources.getTexture("background"), displayScale));
 				}	
 			}
 
