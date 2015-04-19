@@ -18,18 +18,13 @@ public class LoadingSplash {
 	public void run (float scale) throws Exception {
 		boolean running = true;
 		
-		Image splash = new Image(0, 0, FileLoader.loadTexture("res/spoopygames.png"), scale);
 		long start = GameDisplay.getTime();
 		display.blit();
-		
-		splash.render();
 		
 		resourceManager = new ResourceManager();
 		
 		while (running) {
 			display.blit();
-			
-			splash.render();
 			
 			display.closeIfRequested();
 			
