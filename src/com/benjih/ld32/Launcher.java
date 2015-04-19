@@ -55,7 +55,7 @@ public class Launcher {
 			}
 			
 			if(tutorial > 0) {
-				new Image(0, 0, resources.getTexture("tutorial-" + tutorial), 1.0f).render();
+				new Image(0, 0, resources.getTexture("tutorial-" + tutorial), displayScale).render();
 				if(time == 0) {
 					time = GameDisplay.getTime();
 				}

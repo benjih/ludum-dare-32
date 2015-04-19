@@ -1,5 +1,6 @@
 package com.benjih.ld32.core;
 
+import com.benjih.ld32.DisplayScale;
 import com.benjih.ld32.card.PlayingCardPosition;
 import com.benjih.ld32.gl.GameDisplay;
 
@@ -9,11 +10,13 @@ public class TurnManager {
 	private Player enemy;
 	private long time;
 	private UserInterface userInterface;
+	private DisplayScale displayScale;
 
-	public TurnManager (Player player, Player enemy, UserInterface userInterface) {
+	public TurnManager (Player player, Player enemy, UserInterface userInterface, DisplayScale displayScale) {
 		this.player = player;
 		this.enemy = enemy;
 		this.userInterface = userInterface;
+		this.displayScale = displayScale;
 	}
 
 	public TurnState isGameOver (TurnState state) {
@@ -67,7 +70,7 @@ public class TurnManager {
 			return returnState;
 		}
 		
-		PlayingCardPosition positionToPlay = controller.chooseCard(currentPlayer.getHand());
+		PlayingCardPosition positionToPlay = controller.chooseCard(currentPlayer.getHand(), displayScale);
 		
 		if(currentPlayer.getHand().getCard(positionToPlay) != null) {
 			currentPlayer.setLastPlayed(currentPlayer.playCard(positionToPlay, oppositePlayer));

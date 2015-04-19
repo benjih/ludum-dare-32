@@ -2,6 +2,7 @@ package com.benjih.ld32.core;
 
 import org.lwjgl.input.Mouse;
 
+import com.benjih.ld32.DisplayScale;
 import com.benjih.ld32.card.Deck;
 import com.benjih.ld32.card.PlayingCardPosition;
 import com.benjih.ld32.gl.GameDisplay;
@@ -21,24 +22,25 @@ public class Game {
 
 	private boolean shouldPause;
 	private long time = 0;
+	private DisplayScale displayScale;
 
 	public Game(GameDisplay display, ResourceManager resources, UserInterface userInterface) {
 		this.resources = resources;
 
-		player = new Player(new Deck(resources));
-		enemy = new Player(new Deck(resources));
+		displayScale = display.getDisplayScale();
+		player = new Player(new Deck(resources, displayScale));
+		enemy = new Player(new Deck(resources, displayScale));
 
 		this.userInterface = userInterface;
 
 		shouldPause = false;
 
-		this.turnManager = new TurnManager(player, enemy, userInterface);
+		this.turnManager = new TurnManager(player, enemy, userInterface, displayScale);
 
 	}
 
 	public TurnState run (TurnState state) {
 		state = turnManager.isGameOver(state);
-		
 		
 		state = turnManager.drawCard(state);
 		state = turnManager.playCard(state, new HumanController(), new AIController());
@@ -53,9 +55,9 @@ public class Game {
 			if(time == 0) {
 				time = GameDisplay.getTime();
 			}
-			new Image(0, 0, resources.getTexture("loser"), 1.0f).render();
+			new Image(0, 0, resources.getTexture("loser"), displayScale).render();
 			if (GameDisplay.getTime() >= time + 500) {
-				if (Mouse.isButtonDown(0) && MouseUtils.isClick(710, 210, 500, 600)) {
+				if (Mouse.isButtonDown(0) && MouseUtils.isClick(710, 210, 500, 600, displayScale)) {
 					return TurnState.END;
 					
 				}
@@ -64,9 +66,9 @@ public class Game {
 			if(time == 0) {
 				time = GameDisplay.getTime();
 			}
-			new Image(0, 0, resources.getTexture("winner"), 1.0f).render();
+			new Image(0, 0, resources.getTexture("winner"), displayScale).render();
 			if (GameDisplay.getTime() >= time + 500) {
-				if (Mouse.isButtonDown(0) && MouseUtils.isClick(710, 210, 500, 600)) {
+				if (Mouse.isButtonDown(0) && MouseUtils.isClick(710, 210, 500, 600, displayScale)) {
 					return TurnState.END;
 					
 				}
@@ -76,13 +78,13 @@ public class Game {
 		if(!shouldPause) {
 			shouldPause = shouldPause();
 		} else {
-			new Image(0, 0, resources.getTexture("pause-menu"), 1.0f).render();
+			new Image(0, 0, resources.getTexture("pause-menu"), displayScale).render();
 			
-			if (Mouse.isButtonDown(0) && MouseUtils.isClick(710, 468, 500, 52)) {
+			if (Mouse.isButtonDown(0) && MouseUtils.isClick(710, 468, 500, 52, displayScale)) {
 				shouldPause = false;
 			}
 			
-			if (Mouse.isButtonDown(0) && MouseUtils.isClick(710, 612, 500, 52)) {
+			if (Mouse.isButtonDown(0) && MouseUtils.isClick(710, 612, 500, 52, displayScale)) {
 				shouldPause = false;
 				return TurnState.ENEMY_WIN;
 			}
@@ -92,8 +94,7 @@ public class Game {
 	}
 
 	private boolean shouldPause() {
-		return Mouse.isButtonDown(0)
-				&& MouseUtils.isClick(1920 - 64, 0, 64, 64);
+		return Mouse.isButtonDown(0) && MouseUtils.isClick(1920 - 64, 0, 64, 64, displayScale);
 	}
 
 	private void render() {
@@ -106,6 +107,6 @@ public class Game {
 			enemy.getLastPlayed().render();
 		}
 		player.getHand().render();
-		enemy.getHand().renderHidden(new Image(0, 0, resources.getTexture("card-back"), 1.0f));
+		enemy.getHand().renderHidden(new Image(0, 0, resources.getTexture("card-back"), displayScale));
 	}
 }

@@ -1,12 +1,13 @@
 package com.benjih.ld32.core;
 
+import com.benjih.ld32.DisplayScale;
 import com.benjih.ld32.card.Hand;
 import com.benjih.ld32.card.PlayingCardPosition;
 
 public class AIController implements PlayerController {
 
 	@Override
-	public PlayingCardPosition chooseCard(Hand hand) {
+	public PlayingCardPosition chooseCard(Hand hand, DisplayScale displayScale) {
 		if (hand.getCard(PlayingCardPosition.POS_1) != null) {
 			return PlayingCardPosition.POS_1;
 		} else if(hand.getCard(PlayingCardPosition.POS_2) != null) {

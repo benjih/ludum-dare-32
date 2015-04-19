@@ -13,8 +13,8 @@ public class PlayingCard extends Sprite {
 	private Effect effect;
 	private String name;
 	
-	public PlayingCard (String name, Texture resource, int damage, int armour, Effect effect) {
-		super(0, 0, resource, new DisplayScale(1.0f));
+	public PlayingCard (String name, Texture resource, int damage, int armour, Effect effect, DisplayScale displayScale) {
+		super(0, 0, resource, displayScale);
 		this.name = name;
 		this.damage = damage;
 		this.armour = armour;
