@@ -24,6 +24,8 @@ public class Game {
 	private ResourceManager resources;
 
 	private UserInterface userInterface;
+	
+	private TurnManager turnManager;
 
 	private boolean shouldPause;
 
@@ -38,12 +40,15 @@ public class Game {
 
 		shouldPause = false;
 		
+		this.turnManager = new TurnManager(player, enemy);
+		
 	}
 
 	public TurnState run (TurnState state) {
-		
-		state = checkHealth(state);
-		
+		TurnState newState = turnManager.isGameOver();
+		if(newState != null) {
+			state = newState;
+		}
 		
 		if(state.isPlayerTurn() && !shouldPause) {
 			
@@ -76,7 +81,6 @@ public class Game {
 					
 					if(positionToPlay != null) {
 						lastEnemyCard = enemy.playCard(positionToPlay, player);
-						System.out.println(lastEnemyCard.getName());
 						state = TurnState.PLAYER_DRAW;
 					}
 				}
@@ -104,15 +108,6 @@ public class Game {
 			}
 		}
 		
-		return state;
-	}
-
-	private TurnState checkHealth(TurnState state) {
-		if(player.getHealth() <= 0) {
-			state = TurnState.ENEMY_WIN;
-		} else if(enemy.getHealth() <= 0) {
-			state = TurnState.PLAYER_WIN;
-		}
 		return state;
 	}
 
