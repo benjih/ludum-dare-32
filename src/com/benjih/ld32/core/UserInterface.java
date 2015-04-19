@@ -105,13 +105,17 @@ public class UserInterface {
 	public void drawScoreCards(Player player, Player enemy) {
 		new Image(0, 199, resources.getTexture("player-card"), 1.0f).render();
 		playerCardNameFont.drawString(15, 219, "Computer", new Color(83, 83, 83));
-		playerCardNameFont.drawString(55, 325, String.valueOf(enemy.getHealth()), new Color(217, 54, 0), TrueTypeFont.ALIGN_RIGHT);
-		playerCardNameFont.drawString(180, 325, String.valueOf(enemy.getArmour()), new Color(153, 153, 153), TrueTypeFont.ALIGN_RIGHT);
+		playerCardNameFont.drawString(55, 284, String.valueOf(enemy.getDeck().size()), new Color(83, 83, 83), TrueTypeFont.ALIGN_RIGHT);
+		playerCardNameFont.drawString(170, 284, String.valueOf(enemy.getSuprise()), new Color(217, 217, 0), TrueTypeFont.ALIGN_CENTER);
+		playerCardNameFont.drawString(55, 345, String.valueOf(enemy.getHealth()), new Color(217, 54, 0), TrueTypeFont.ALIGN_RIGHT);
+		playerCardNameFont.drawString(170, 345, String.valueOf(enemy.getArmour()), new Color(153, 153, 153), TrueTypeFont.ALIGN_CENTER);
 		
 		new Image(0, 648, resources.getTexture("player-card"), 1.0f).render();
 		playerCardNameFont.drawString(15, 668, "You", new Color(83, 83, 83));
-		playerCardNameFont.drawString(55, 775, String.valueOf(player.getHealth()), new Color(217, 54, 54), TrueTypeFont.ALIGN_RIGHT);
-		playerCardNameFont.drawString(180, 775, String.valueOf(player.getArmour()), new Color(153, 153, 153), TrueTypeFont.ALIGN_RIGHT);
+		playerCardNameFont.drawString(55, 733, String.valueOf(player.getDeck().size()), new Color(83, 83, 83), TrueTypeFont.ALIGN_RIGHT);
+		playerCardNameFont.drawString(170, 733, String.valueOf(player.getSuprise()), new Color(217, 217, 0), TrueTypeFont.ALIGN_CENTER);
+		playerCardNameFont.drawString(55, 794, String.valueOf(player.getHealth()), new Color(217, 54, 0), TrueTypeFont.ALIGN_RIGHT);
+		playerCardNameFont.drawString(170, 794, String.valueOf(player.getArmour()), new Color(153, 153, 153), TrueTypeFont.ALIGN_CENTER);
 	}
 
 	public void drawTable() {

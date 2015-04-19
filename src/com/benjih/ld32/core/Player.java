@@ -12,11 +12,13 @@ public class Player {
 	private int deathPulseRate;
 	private Deck deck;
 	private Hand hand;
+	private int suprise;
 	
 	public Player (Deck deck) {
 		this.setHealth(30);
 		this.setArmour(0);
 		this.deathPulseRate = 1;
+		this.suprise = 0;
 		this.deck = deck;
 		this.hand = new Hand();
 		
@@ -61,6 +63,9 @@ public class Player {
 				effect.useEffect(this, enemy);
 			}
 		}
+		
+		gainSuprise();
+		
 		return card;
 	}
 	
@@ -91,5 +96,15 @@ public class Player {
 	
 	public Hand getHand () {
 		return hand;
+	}
+
+	public int getSuprise () {
+		return suprise;
+	}
+	
+	public void gainSuprise () {
+		if(suprise < 6) {
+			suprise++;
+		}
 	}
 }
