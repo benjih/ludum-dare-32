@@ -1,14 +1,17 @@
 package com.benjih.ld32.resources;
 
 import java.awt.Font;
+import java.io.InputStream;
 import java.util.HashMap;
 
 import org.newdawn.slick.opengl.Texture;
+import org.newdawn.slick.util.ResourceLoader;
 
 public class ResourceManager {
 	
 	private HashMap<String, Texture> textures;
 	private HashMap<String, Font> fonts;
+	private InputStream music;
 
 	public ResourceManager () {
 		this.textures = new HashMap<String, Texture>();
@@ -58,6 +61,8 @@ public class ResourceManager {
 		
 		this.fonts = new HashMap<String, Font>();
 		fonts.put("oswald", FileLoader.loadFont("res/Oswald.ttf"));
+		
+		music = ResourceLoader.getResourceAsStream("res/music.wav");
 	}
 
 	public Texture getTexture (String resourceName) {
@@ -66,5 +71,9 @@ public class ResourceManager {
 	
 	public Font getFont (String resourceName) {
 		return fonts.get(resourceName);
+	}
+
+	public InputStream getMusic() {
+		return music;
 	}
 }

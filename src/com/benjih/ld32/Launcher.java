@@ -1,6 +1,9 @@
 package com.benjih.ld32;
 
 import org.lwjgl.input.Mouse;
+import org.newdawn.slick.openal.Audio;
+import org.newdawn.slick.openal.AudioLoader;
+import org.newdawn.slick.util.ResourceLoader;
 
 import com.benjih.ld32.core.Game;
 import com.benjih.ld32.core.MouseUtils;
@@ -25,6 +28,10 @@ public class Launcher {
 		int tutorial = 0;
 		UserInterface userInterface = new UserInterface(resources);
 		long time = 0;
+		
+		Audio  wavEffect = AudioLoader.getAudio("WAV", resources.getMusic());
+		wavEffect.playAsMusic(1.0f, 1.0f, true);
+		
 		while (true) {
 			display.blit();
 			
