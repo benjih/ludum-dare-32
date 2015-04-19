@@ -42,6 +42,48 @@ public class Game {
 	}
 
 	public TurnState run (TurnState state) {
+		
+		state = checkHealth(state);
+		
+		
+		if(state.isPlayerTurn() && !shouldPause) {
+			
+			if(state.equals(TurnState.PLAYER_DRAW)) {
+				state = TurnState.PLAYER_USE;
+				player.drawCard();
+			}
+			
+			if(state.equals(TurnState.PLAYER_USE)) {
+				userInterface.setString("top", "Your turn to play a card");
+				
+				PlayingCardPosition positionToPlay = chooseCard();
+		
+				if(player.getHand().getCard(positionToPlay) != null) {
+					lastPlayerCard = player.playCard(positionToPlay, enemy);
+					state = TurnState.ENEMY_DRAW;
+				}
+			}
+		} else if(!shouldPause){
+			if(state.equals(TurnState.ENEMY_DRAW)) {
+				enemy.drawCard();
+				state = TurnState.ENEMY_USE;
+				time = display.getTime();
+			} 
+			
+			if(state.equals(TurnState.ENEMY_USE)) {
+				userInterface.setString("top", "Your oponenet's turn to play a card");
+				if (display.getTime() >= time + 1600) {
+					PlayingCardPosition positionToPlay = enemyChooseCard();
+					
+					if(positionToPlay != null) {
+						lastEnemyCard = enemy.playCard(positionToPlay, player);
+						System.out.println(lastEnemyCard.getName());
+						state = TurnState.PLAYER_DRAW;
+					}
+				}
+			}
+		}
+		
 		userInterface.drawTable();
 		render();
 		userInterface.drawTopbar();
@@ -63,46 +105,6 @@ public class Game {
 			}
 		}
 		
-		state = checkHealth(state);
-		
-		
-		if(state.isPlayerTurn() && !shouldPause) {
-			
-			if(state.equals(TurnState.PLAYER_DRAW)) {
-				player.drawCard();
-				state = TurnState.PLAYER_USE;
-			}
-			
-			if(state.equals(TurnState.PLAYER_USE)) {
-				userInterface.setString("top", "Your turn to play a card");
-				
-				PlayingCardPosition positionToPlay = chooseCard();
-		
-				if(player.getHand().getCard(positionToPlay) != null) {
-					lastPlayerCard = player.playCard(positionToPlay, enemy);
-					state = TurnState.ENEMY_DRAW;
-				}
-			}
-		} else if(!shouldPause){
-			if(state.equals(TurnState.ENEMY_DRAW)) {
-				System.out.println("enemy turn");
-				enemy.drawCard();
-				state = TurnState.ENEMY_USE;
-				time = display.getTime();
-			} 
-			
-			if(state.equals(TurnState.ENEMY_USE)) {
-				userInterface.setString("top", "Your oponenet's turn to play a card");
-				if (display.getTime() >= time + 1600) {
-					PlayingCardPosition positionToPlay = enemyChooseCard();
-					
-					if(positionToPlay != null) {
-						lastEnemyCard = enemy.playCard(positionToPlay, player);
-						state = TurnState.PLAYER_DRAW;
-					}
-				}
-			}
-		}
 		return state;
 	}
 
@@ -154,16 +156,15 @@ public class Game {
 	}
 
 	private void render() {
-		player.getHand().render();
-		enemy.getHand().renderHidden(new Image(0, 0, resources.getTexture("card-back"), 1.0f));
 		if (lastPlayerCard != null) {
+			lastPlayerCard.setPosition(PlayingCardPosition.POS_PLAYED);
 			lastPlayerCard.render();
-		} else {
-			System.out.println("ITS NULL");
 		}
 		if (lastEnemyCard != null) {
 			lastEnemyCard.setPosition(PlayingCardPosition.POS_ENEMY_PLAYED);
 			lastEnemyCard.render();
 		}
+		player.getHand().render();
+		enemy.getHand().renderHidden(new Image(0, 0, resources.getTexture("card-back"), 1.0f));
 	}
 }
