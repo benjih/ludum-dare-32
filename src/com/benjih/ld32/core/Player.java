@@ -38,7 +38,21 @@ public class Player {
 			hand.useCard(positionToPlay);
 			card.setPosition(PlayingCardPosition.POS_PLAYED);
 			setArmour(armour + card.getArmour());
-			enemy.setHealth(enemy.getHealth() - card.getDamage());
+			
+			int damage = card.getDamage();
+			int enemyArmour = enemy.getArmour();
+			if(enemy.getArmour() > 0 && damage > 0) {
+				enemy.setArmour(enemyArmour - damage);
+				damage = damage - enemyArmour;
+				
+				if(enemy.getArmour() < 0) {
+					enemy.setArmour(0);
+				}
+			}
+			
+			if(damage > 0) {
+				enemy.setHealth(enemy.getHealth() - damage);
+			}
 			
 			Effect effect = card.getEffect();
 			if(effect != null) {
