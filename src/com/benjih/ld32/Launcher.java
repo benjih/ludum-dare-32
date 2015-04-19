@@ -37,7 +37,7 @@ public class Launcher {
 			
 			if(menu) {
 				userInterface.drawBackground();
-				new Image(0, 0, resources.getTexture("start-menu"), displayScale.getScale()).render();
+				new Image(0, 0, resources.getTexture("start-menu"), displayScale).render();
 				
 				if (Mouse.isButtonDown(0) && MouseUtils.isClick(710, 476, 500, 52, displayScale)) {
 					menu = false;
