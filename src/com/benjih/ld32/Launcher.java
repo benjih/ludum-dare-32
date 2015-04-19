@@ -3,7 +3,6 @@ package com.benjih.ld32;
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.openal.Audio;
 import org.newdawn.slick.openal.AudioLoader;
-import org.newdawn.slick.util.ResourceLoader;
 
 import com.benjih.ld32.core.Game;
 import com.benjih.ld32.core.MouseUtils;

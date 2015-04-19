@@ -1,8 +1,6 @@
 package com.benjih.ld32;
 
 import com.benjih.ld32.gl.GameDisplay;
-import com.benjih.ld32.gl.Image;
-import com.benjih.ld32.resources.FileLoader;
 import com.benjih.ld32.resources.ResourceManager;
 
 public class LoadingSplash {
