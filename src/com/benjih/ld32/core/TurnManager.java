@@ -1,5 +1,6 @@
 package com.benjih.ld32.core;
 
+import com.benjih.ld32.card.Hand;
 import com.benjih.ld32.card.PlayingCard;
 import com.benjih.ld32.card.PlayingCardPosition;
 import com.benjih.ld32.gl.GameDisplay;
@@ -21,13 +22,13 @@ public class TurnManager {
 		this.lastEnemyCard = null;
 	}
 
-	public TurnState isGameOver () {
+	public TurnState isGameOver (TurnState state) {
 		if(player.getHealth() <= 0) {
 			return TurnState.ENEMY_WIN;
 		} else if(enemy.getHealth() <= 0) {
 			return TurnState.PLAYER_WIN;
 		}
-		return null;
+		return state;
 	}
 	
 	public TurnState drawCard (TurnState state) {
@@ -51,16 +52,23 @@ public class TurnManager {
 	public TurnState playCard(TurnState state, PlayerController controller, PlayerController enemyController) {
 		if(state.equals(TurnState.PLAYER_USE)) {
 			userInterface.setString("top", "Your turn to play a card");
+			if(player.getHand().isEmpty()) {
+				return TurnState.ENEMY_DRAW;
+			}
 			
 			PlayingCardPosition positionToPlay = controller.chooseCard(player.getHand());
 	
 			if(player.getHand().getCard(positionToPlay) != null) {
-				lastPlayerCard = (player.playCard(positionToPlay, enemy));
+				lastPlayerCard = player.playCard(positionToPlay, enemy);
 				state = TurnState.ENEMY_DRAW;
 			}
 		}
 		
 		if(state.equals(TurnState.ENEMY_USE)) {
+			if(enemy.getHand().isEmpty()) {
+				return TurnState.PLAYER_DRAW;
+			}
+			
 			userInterface.setString("top", "Your oponenet's turn to play a card");
 			PlayingCardPosition positionToPlay = enemyController.chooseCard(enemy.getHand());
 				

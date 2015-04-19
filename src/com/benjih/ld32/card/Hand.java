@@ -69,4 +69,14 @@ public class Hand {
 			}
 		}
 	}
+
+	public boolean isEmpty() {
+		int empty = 0;
+		for(PlayingCard card : hand.values()) {
+			if(card == null) {
+				empty++;
+			}
+		}
+		return empty == 6;
+	}
 }

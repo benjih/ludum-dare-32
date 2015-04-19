@@ -36,10 +36,7 @@ public class Game {
 	}
 
 	public TurnState run (TurnState state) {
-		TurnState newState = turnManager.isGameOver();
-		if(newState != null) {
-			state = newState;
-		}
+		state = turnManager.isGameOver(state);
 		
 		state = turnManager.drawCard(state);
 		state = turnManager.playCard(state, new HumanController(), new AIController());
