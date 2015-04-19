@@ -54,6 +54,7 @@ public class ResourceManager {
 		textures.put("card-hide", FileLoader.loadTexture("res/card-hide.png"));
 		textures.put("card-dodge", FileLoader.loadTexture("res/card-dodge.png"));
 		textures.put("card-runaway", FileLoader.loadTexture("res/card-runaway.png"));
+		textures.put("card-ninja", FileLoader.loadTexture("res/card-ninja.png"));
 		
 		this.fonts = new HashMap<String, Font>();
 		fonts.put("oswald", FileLoader.loadFont("res/Oswald.ttf"));

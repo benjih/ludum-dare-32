@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import com.benjih.ld32.card.effects.DrawEffect;
+import com.benjih.ld32.card.effects.ResetSurpriseEffect;
 import com.benjih.ld32.card.effects.UnconventionalEffect;
 import com.benjih.ld32.resources.ResourceManager;
 
@@ -24,9 +25,7 @@ public class Deck {
 		PlayingCard dodge = new PlayingCard("Dodge", resources.getTexture("card-dodge"), 0, 0, new DrawEffect(1));
 		PlayingCard hide = new PlayingCard("Hide", resources.getTexture("card-hide"), 0, 0, null);
 		PlayingCard runaway = new PlayingCard("Run Away", resources.getTexture("card-runaway"), 0, 0, new DrawEffect(3));
-		
-		
-		
+		PlayingCard ninja = new PlayingCard("Ninja", resources.getTexture("card-ninja"), 0, 0, new ResetSurpriseEffect());
 		
 		cards.add(fist);
 		cards.add(fist);
@@ -57,6 +56,8 @@ public class Deck {
 		cards.add(hide);
 		cards.add(runaway);
 		cards.add(runaway);
+		cards.add(ninja);
+		cards.add(ninja);
 		
 		Collections.shuffle(cards);
 	}
