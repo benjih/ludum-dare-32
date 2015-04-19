@@ -17,6 +17,8 @@ public class ResourceManager {
 		textures.put("pause", FileLoader.loadTexture("res/pause.png"));
 		textures.put("pause-menu", FileLoader.loadTexture("res/pause-menu.png"));
 		
+		textures.put(("start-menu"), FileLoader.loadTexture("res/start-menu.png"));
+		
 		textures.put("player-hand-mat", FileLoader.loadTexture("res/player-hand-mat.png"));
 		textures.put("opponent-hand-mat", FileLoader.loadTexture("res/opponent-hand-mat.png"));
 		textures.put("played-cards-mat", FileLoader.loadTexture("res/played-cards-mat.png"));

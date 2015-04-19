@@ -1,8 +1,13 @@
 package com.benjih.ld32;
 
+import org.lwjgl.input.Mouse;
+
 import com.benjih.ld32.core.Game;
+import com.benjih.ld32.core.MouseUtils;
 import com.benjih.ld32.core.TurnState;
+import com.benjih.ld32.core.UserInterface;
 import com.benjih.ld32.gl.GameDisplay;
+import com.benjih.ld32.gl.Image;
 import com.benjih.ld32.resources.ResourceManager;
 
 public class Launcher {
@@ -18,10 +23,25 @@ public class Launcher {
 		Game game = new Game(display, resources);
 		
 		TurnState state = TurnState.PLAYER_DRAW;
+		boolean menu = true;
+		UserInterface userInterface = new UserInterface(resources);
 		while (true) {
 			display.blit();
 			
-			if(!state.equals(TurnState.ENEMY_WIN) && !state.equals(TurnState.PLAYER_WIN)) {
+			if(menu) {
+				userInterface.drawBackground();
+				new Image(0, 0, resources.getTexture("start-menu"), 1.0f).render();
+				
+				if (Mouse.isButtonDown(0) && MouseUtils.isClick(710, 468, 500, 52)) {
+					menu = false;
+				}
+				
+				if (Mouse.isButtonDown(0) && MouseUtils.isClick(710, 612, 500, 52)) {
+					display.end();
+				}
+			}
+			
+			if(!state.equals(TurnState.ENEMY_WIN) && !state.equals(TurnState.PLAYER_WIN) && !menu) {
 				state = game.run(state);
 			} else if(state.equals(TurnState.ENEMY_WIN)) {
 				System.out.println("Loser");

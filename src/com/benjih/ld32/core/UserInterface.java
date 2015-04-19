@@ -68,7 +68,7 @@ public class UserInterface {
 			matImages = new ArrayList<Image>();
 			matImages.add(new Image(343, 740, resources.getTexture("player-hand-mat"), 1.0f));
 			matImages.add(new Image(343, 0, resources.getTexture("opponent-hand-mat"), 1.0f));
-			matImages.add(new Image(786, 352, resources.getTexture("played-cards-mat"), 1.0f));
+			matImages.add(new Image(750, 353, resources.getTexture("played-cards-mat"), 1.0f));
 		} else {
 			for(Image image : matImages) {
 				image.render();
