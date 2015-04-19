@@ -14,6 +14,7 @@ public class Player {
 	private Deck deck;
 	private Hand hand;
 	private int suprise;
+	private PlayingCard lastPlayed;
 	
 	public Player (Deck deck) {
 		this.setHealth(30);
@@ -22,6 +23,7 @@ public class Player {
 		this.suprise = 0;
 		this.deck = deck;
 		this.hand = new Hand();
+		this.setLastPlayed(null);
 		
 		drawCard();
 		drawCard();
@@ -117,5 +119,13 @@ public class Player {
 
 	public void resetSurprise() {
 		suprise = 0;
+	}
+
+	public PlayingCard getLastPlayed () {
+		return lastPlayed;
+	}
+
+	public void setLastPlayed (PlayingCard lastPlayed) {
+		this.lastPlayed = lastPlayed;
 	}
 }

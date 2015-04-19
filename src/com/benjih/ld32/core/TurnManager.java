@@ -1,7 +1,5 @@
 package com.benjih.ld32.core;
 
-import com.benjih.ld32.card.Hand;
-import com.benjih.ld32.card.PlayingCard;
 import com.benjih.ld32.card.PlayingCardPosition;
 import com.benjih.ld32.gl.GameDisplay;
 
@@ -11,15 +9,11 @@ public class TurnManager {
 	private Player enemy;
 	private long time;
 	private UserInterface userInterface;
-	private PlayingCard lastPlayerCard;
-	private PlayingCard lastEnemyCard;
 
 	public TurnManager (Player player, Player enemy, UserInterface userInterface) {
 		this.player = player;
 		this.enemy = enemy;
 		this.userInterface = userInterface;
-		this.lastPlayerCard = null;
-		this.lastEnemyCard = null;
 	}
 
 	public TurnState isGameOver (TurnState state) {
@@ -58,40 +52,29 @@ public class TurnManager {
 	public TurnState playCard(TurnState state, PlayerController controller, PlayerController enemyController) {
 		if(state.equals(TurnState.PLAYER_USE)) {
 			userInterface.setString("top", "Your turn to play a card");
-			if(player.getHand().isEmpty()) {
-				return TurnState.ENEMY_DRAW;
-			}
-			
-			PlayingCardPosition positionToPlay = controller.chooseCard(player.getHand());
-	
-			if(player.getHand().getCard(positionToPlay) != null) {
-				lastPlayerCard = player.playCard(positionToPlay, enemy);
-				state = TurnState.ENEMY_DRAW;
-			}
+			return playCard(player, enemy, state, TurnState.ENEMY_DRAW, controller);
 		}
 		
 		if(state.equals(TurnState.ENEMY_USE)) {
-			if(enemy.getHand().isEmpty()) {
-				return TurnState.PLAYER_DRAW;
-			}
-			
 			userInterface.setString("top", "Your oponenet's turn to play a card");
-			PlayingCardPosition positionToPlay = enemyController.chooseCard(enemy.getHand());
-				
-			if(positionToPlay != null) {
-				lastEnemyCard = enemy.playCard(positionToPlay, player);
-				state = TurnState.PLAYER_DRAW;
-			}
+			return playCard(enemy, player, state, TurnState.PLAYER_DRAW, enemyController);
 		}
 		return state;
 	}
-
-	public PlayingCard getLastPlayerCard() {
-		return lastPlayerCard;
-	}
 	
-	public PlayingCard getLastEnemyCard() {
-		return lastEnemyCard;
+	private TurnState playCard (Player currentPlayer, Player oppositePlayer, TurnState currentState, TurnState returnState, PlayerController controller) {
+		if(currentPlayer.getHand().isEmpty()) {
+			return returnState;
+		}
+		
+		PlayingCardPosition positionToPlay = controller.chooseCard(currentPlayer.getHand());
+		
+		if(currentPlayer.getHand().getCard(positionToPlay) != null) {
+			currentPlayer.setLastPlayed(currentPlayer.playCard(positionToPlay, oppositePlayer));
+			
+			return returnState;
+		}
+		
+		return currentState;
 	}
-
 }

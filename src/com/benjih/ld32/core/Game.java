@@ -71,18 +71,15 @@ public class Game {
 	}
 
 	private void render() {
-		if (turnManager.getLastPlayerCard() != null) {
-			turnManager.getLastPlayerCard().setPosition(
-					PlayingCardPosition.POS_PLAYED);
-			turnManager.getLastPlayerCard().render();
+		if (player.getLastPlayed() != null) {
+			player.getLastPlayed().setPosition(PlayingCardPosition.POS_PLAYED);
+			player.getLastPlayed().render();
 		}
-		if (turnManager.getLastEnemyCard() != null) {
-			turnManager.getLastEnemyCard().setPosition(
-					PlayingCardPosition.POS_ENEMY_PLAYED);
-			turnManager.getLastEnemyCard().render();
+		if (enemy.getLastPlayed() != null) {
+			enemy.getLastPlayed().setPosition(PlayingCardPosition.POS_ENEMY_PLAYED);
+			enemy.getLastPlayed().render();
 		}
 		player.getHand().render();
-		enemy.getHand().renderHidden(
-				new Image(0, 0, resources.getTexture("card-back"), 1.0f));
+		enemy.getHand().renderHidden(new Image(0, 0, resources.getTexture("card-back"), 1.0f));
 	}
 }
