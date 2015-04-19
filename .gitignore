@@ -46,5 +46,4 @@ Temporary Items
 .project
 .classpath
 res/layout.png
-build/ludum-dare-32.jar
-build/ludum-dare-32/ludum-dare-32.jar
+build/*
