@@ -4,6 +4,7 @@ import com.benjih.ld32.card.Deck;
 import com.benjih.ld32.card.Hand;
 import com.benjih.ld32.card.PlayingCard;
 import com.benjih.ld32.card.PlayingCardPosition;
+import com.benjih.ld32.card.effects.Effect;
 
 public class Player {
 	

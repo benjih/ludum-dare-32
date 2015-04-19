@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import com.benjih.ld32.core.DrawEffect;
-import com.benjih.ld32.core.UnconventionalEffect;
+import com.benjih.ld32.card.effects.DrawEffect;
+import com.benjih.ld32.card.effects.UnconventionalEffect;
 import com.benjih.ld32.resources.ResourceManager;
 
 

@@ -2,7 +2,7 @@ package com.benjih.ld32.card;
 
 import org.newdawn.slick.opengl.Texture;
 
-import com.benjih.ld32.core.Effect;
+import com.benjih.ld32.card.effects.Effect;
 import com.benjih.ld32.gl.Sprite;
 
 public class PlayingCard extends Sprite {
