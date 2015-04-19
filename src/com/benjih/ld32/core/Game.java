@@ -42,8 +42,7 @@ public class Game {
 	}
 
 	public TurnState run (TurnState state) {
-		userInterface.drawBackground();
-		userInterface.drawMats();
+		userInterface.drawTable();
 		render();
 		userInterface.drawTopbar();
 		userInterface.drawTopbarMessage();
@@ -64,11 +63,7 @@ public class Game {
 			}
 		}
 		
-		if(player.getHealth() <= 0) {
-			state = TurnState.ENEMY_WIN;
-		} else if(enemy.getHealth() <= 0) {
-			state = TurnState.PLAYER_WIN;
-		}
+		state = checkHealth(state);
 		
 		
 		if(state.isPlayerTurn() && !shouldPause) {
@@ -83,10 +78,9 @@ public class Game {
 				
 				PlayingCardPosition positionToPlay = chooseCard();
 		
-				if(positionToPlay != null) {
+				if(player.getHand().getCard(positionToPlay) != null) {
 					lastPlayerCard = player.playCard(positionToPlay, enemy);
 					state = TurnState.ENEMY_DRAW;
-					printStatus();
 				}
 			}
 		} else if(!shouldPause){
@@ -103,16 +97,20 @@ public class Game {
 					PlayingCardPosition positionToPlay = enemyChooseCard();
 					
 					if(positionToPlay != null) {
-						if(positionToPlay == null) {
-							lastPlayerCard = null;
-						} else {
-							lastEnemyCard = enemy.playCard(positionToPlay, player);
-							state = TurnState.PLAYER_DRAW;
-						}
-						printStatus();
+						lastEnemyCard = enemy.playCard(positionToPlay, player);
+						state = TurnState.PLAYER_DRAW;
 					}
 				}
 			}
+		}
+		return state;
+	}
+
+	private TurnState checkHealth(TurnState state) {
+		if(player.getHealth() <= 0) {
+			state = TurnState.ENEMY_WIN;
+		} else if(enemy.getHealth() <= 0) {
+			state = TurnState.PLAYER_WIN;
 		}
 		return state;
 	}
@@ -122,49 +120,26 @@ public class Game {
 	}
 
 	private PlayingCardPosition chooseCard () {
-		PlayingCardPosition positionToPlay = null;
 		if(Mouse.isButtonDown(0) && MouseUtils.isClick(PlayingCardPosition.POS_1.getX(), PlayingCardPosition.POS_1.getY(), 181, 252)) {
-			positionToPlay = PlayingCardPosition.POS_1;
+			return PlayingCardPosition.POS_1;
 		}
 		if(Mouse.isButtonDown(0) && MouseUtils.isClick(PlayingCardPosition.POS_2.getX(), PlayingCardPosition.POS_2.getY(), 181, 252)) {
-			positionToPlay = PlayingCardPosition.POS_2;
+			return PlayingCardPosition.POS_2;
 		}
 		if(Mouse.isButtonDown(0) && MouseUtils.isClick(PlayingCardPosition.POS_3.getX(), PlayingCardPosition.POS_3.getY(), 181, 252)) {
-			positionToPlay = PlayingCardPosition.POS_3;
+			return PlayingCardPosition.POS_3;
 		}
 		if(Mouse.isButtonDown(0) && MouseUtils.isClick(PlayingCardPosition.POS_4.getX(), PlayingCardPosition.POS_4.getY(), 181, 252)) {
-			positionToPlay = PlayingCardPosition.POS_4;
+			return PlayingCardPosition.POS_4;
 		}
 		if(Mouse.isButtonDown(0) && MouseUtils.isClick(PlayingCardPosition.POS_5.getX(), PlayingCardPosition.POS_5.getY(), 181, 252)) {
-			positionToPlay = PlayingCardPosition.POS_5;
+			return PlayingCardPosition.POS_5;
 		}
 		if(Mouse.isButtonDown(0) && MouseUtils.isClick(PlayingCardPosition.POS_6.getX(), PlayingCardPosition.POS_6.getY(), 181, 252)) {
-			positionToPlay = PlayingCardPosition.POS_6;
+			return PlayingCardPosition.POS_6;
 		}
 		
-		
-		while (Keyboard.next()) {
-			if (Keyboard.getEventKeyState()) {
-				if (Keyboard.getEventKey() == Keyboard.KEY_1) {
-				}
-				if (Keyboard.getEventKey() == Keyboard.KEY_2) {
-					positionToPlay = PlayingCardPosition.POS_2;
-				}
-				if (Keyboard.getEventKey() == Keyboard.KEY_3) {
-					positionToPlay = PlayingCardPosition.POS_3;
-				}
-				if (Keyboard.getEventKey() == Keyboard.KEY_4) {
-					positionToPlay = PlayingCardPosition.POS_4;
-				}
-				if (Keyboard.getEventKey() == Keyboard.KEY_5) {
-					positionToPlay = PlayingCardPosition.POS_5;
-				}
-				if (Keyboard.getEventKey() == Keyboard.KEY_6) {
-					positionToPlay = PlayingCardPosition.POS_6;
-				}
-			}
-		}
-		return positionToPlay;
+		return PlayingCardPosition.NONE;
 	}
 	
 	private PlayingCardPosition enemyChooseCard () {
@@ -178,16 +153,13 @@ public class Game {
 		return PlayingCardPosition.POS_4;
 	}
 
-	private void printStatus() {
-		System.out.println("Player : " + player.getHealth() + "/" + player.getArmour() + " " + player.getDeck().size());
-		System.out.println("Enemy : " + enemy.getHealth() + "/" + enemy.getArmour() + " " + enemy.getDeck().size());
-	}
-
 	private void render() {
 		player.getHand().render();
 		enemy.getHand().renderHidden(new Image(0, 0, resources.getTexture("card-back"), 1.0f));
 		if (lastPlayerCard != null) {
 			lastPlayerCard.render();
+		} else {
+			System.out.println("ITS NULL");
 		}
 		if (lastEnemyCard != null) {
 			lastEnemyCard.setPosition(PlayingCardPosition.POS_ENEMY_PLAYED);
